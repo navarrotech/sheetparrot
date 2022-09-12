@@ -1,0 +1,27 @@
+{{@if(it.pagination && it.pagination.pagination && it.pagination.pages)}}
+<nav class="pagination is-centered is-small" role="navigation" aria-label="pagination">
+    <ul class="pagination-list">
+
+        {{@if(it.pagination.pagination != 0)}}
+        <li><a class="pagination-link" aria-label="Goto page 1" href="{{it.pagination.base_href}}0">1</a></li>
+        <li><span class="pagination-ellipsis">&hellip;</span></li>
+        {{/if}}
+
+        {{@if(it.pagination.pagination + 1 <= it.pagination.pages)}}
+        <li><a class="pagination-link" aria-label="Goto page {{it.pagination.pagination}}" href="{{it.pagination.base_href}}{{it.pagination.pagination}}">{{it.pagination.pagination}}</a></li>
+        {{/if}}
+
+        <li><a class="pagination-link is-current" aria-label="Page {{it.pagination.pagination + 1}}" aria-current="page">{{it.pagination.pagination + 1}}</a></li>
+
+        {{@if(it.pagination.pagination + 1 <= it.pagination.pages)}}
+        <li><a class="pagination-link" aria-label="Goto page {{it.pagination.pagination + 2}}" href="{{it.pagination.base_href}}{{it.pagination.pagination + 2}}">{{it.pagination.pagination + 2}}</a></li>
+        {{/if}}
+
+        {{@if(it.pagination.pagination != it.pagination.pages)}}
+        <li><span class="pagination-ellipsis">&hellip;</span></li>
+        <li><a class="pagination-link" aria-label="Goto page {{it.pagination.pages}}" href="{{it.pagination.base_href}}{{it.pagination.pages}}">{{it.pagination.pages}}</a></li>
+        {{/if}}
+
+    </ul>
+</nav>
+{{/if}}

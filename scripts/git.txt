@@ -1,0 +1,28 @@
+# DEPLOY
+git add .
+git commit -am "title"
+
+# PULL
+git pull --no-commit
+
+# STASH
+git stash
+
+# UNSTASH
+git stash pop
+
+# STATUS
+git status
+
+
+
+
+######### ------- #########
+
+# Multiple Instances Running On Same Port
+
+# Step 1: Locate PID of Port
+sudo lsof -i :8080
+
+# Step 2: Kill the instance using PID
+kill -9 {PID}

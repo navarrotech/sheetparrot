@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SheetParrot Console | Users</title>
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+        <link rel="stylesheet" href="{{it.domain}}/css/console.css?version={{it.css_version}}">
+        <style>
+            .table * {
+                vertical-align: middle !important;
+            }
+        </style>
+    </head>
+    <body>
+        {{@includeFile(it.dir + "/views/console/_headerbar.squirrelly", it)/}}
+        <div class="app">
+            {{@includeFile(it.dir + "/views/console/_sidebar.squirrelly", it)/}}
+            <form class="main" method="GET">
+                <input class="is-hidden" id="goto_page" name="page">
+                <div class="splash">
+                    <h1 class="title is-size-1 has-text-white has-text-centered mb-0 is-hidden-mobile">Viewing all users</h1>
+                </div>
+                <div class="window container is-fullhd is-bottom">
+                    <div class="box">
+                        <div class="twobox is-centered mb-4">
+                            <div class="buttons mb-0">
+                                <!--
+                                <a class="button is-primary">
+                                    <span>Invite User</span>
+                                    <span class="icon"><i class="fas fa-plus"></i></span>
+                                </a>
+                                <a class="button is-light">
+                                    <span>Create testing user</span>
+                                    <span class="icon"><i class="fas fa-plus"></i></span>
+                                </a>-->
+                            </div>
+                            <div class="buttons is-right">
+                                <div class="field has-addons">
+                                    <div class="control">
+                                        <input class="input" type="text" placeholder="User lookup" name="search" {{@if(it.search)}}value="{{it.search}}"{{/if}}>
+                                    </div>
+                                    {{@if(it.search)}}
+                                    <div class="control">
+                                        <button class="button is-light ml-0 mr-0" type="button" id="clearSearch">
+                                            <span class="icon"><i class="fas fa-times"></i></span>
+                                        </button>
+                                    </div>
+                                    {{/if}}
+                                    <div class="control">
+                                        <button class="button is-primary ml-0 mr-0" type="submit" onclick="this.classList.add('is-loading')">
+                                            <span class="icon"><i class="fas fa-search"></i></span>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <table class="table is-striped is-hoverable is-fullwidth is-narrow">
+                            <thead>
+                                <tr>
+                                    <th class="is-hidden-mobile"></th>
+                                    <th>Name</th>
+                                    <th class="is-hidden-mobile">Plan</th>
+                                    <th class="is-hidden-mobile">Signed Up</th>
+                                    <th class="is-hidden-mobile">Last Login</th>
+                                    <th class="is-hidden-mobile">Logins</th>
+                                    <th class="has-text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{@each(it.content.users) => user}}
+                                <tr>
+                                    <td class="is-hidden-mobile">
+                                        <figure class="image is-32x32 is-rounded">
+                                            <img src="{{user.profile_picture}}"/>
+                                        </figure>
+                                    </td>
+                                    <td>
+                                       <p class="title is-size-7">{{user.name}}</p>
+                                       <p class="subtitle is-size-7 mb-0 has-text-grey">{{user.email}}</p>
+                                       <p class="is-size-7 is-hidden-tablet is-italic is-capitalized">Plan: {{@if(user.preferences && user.preferences.billing && user.preferences.billing.plan)}}{{user.preferences.billing.plan}}{{/if}}</p>
+                                    </td>
+                                    <td class="is-hidden-mobile is-capitalized">
+                                        <p>
+                                            {{@if(user.is_vip && user.is_vip == true)}}
+                                            VIP
+                                            {{#elif(user.preferences && user.preferences.billing && user.preferences.billing.plan)}}
+                                            {{user.preferences.billing.plan}}
+                                            {{/if}}
+                                        </p>
+                                    </td>
+                                    <td class="is-hidden-mobile">
+                                        <p class="is-size-6">{{user.prettyTimeFromCreatedDate}} ago</p>
+                                    </td>
+                                    <td class="is-hidden-mobile">
+                                        <p class="is-size-6">{{user.prettyTimeFromLastLogin}} ago</p>
+                                    </td>
+                                    <td>
+                                        <p class="is-size-6">{{@if(user.logins}}{{user.logins}}{{#else}}0{{/if}}</p>
+                                    </td>
+                                    <td>
+                                        <div class="buttons is-right">
+                                            <div class="dropdown is-right">
+                                                <div class="dropdown-trigger">
+                                                    <button class="button is-small is-rounded is-light" type="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                                                        <span class="icon is-small">
+                                                            <i class="fas fa-ellipsis-h" aria-hidden="true"></i>
+                                                        </span>
+                                                    </button>
+                                                </div>
+                                                <div class="dropdown-menu"  role="menu">
+                                                    <div class="dropdown-content">
+                                                    <a class="dropdown-item is-centered" href="{{it.domain}}/console/user/{{user._id}}">
+                                                        <span class="icon"><i class="fas fa-edit"></i></span>
+                                                        <span>Edit user info</span>
+                                                    </a>
+                                                    <!--<a class="dropdown-item is-centered">
+                                                        <span class="icon"><i class="fas fa-receipt"></i></span>
+                                                        <span>Modify billing</span>
+                                                    </a>-->
+                                                    <a class="dropdown-item is-centered is-link" href="{{it.domain}}/console/assumeIdentity?_id={{user._id}}">
+                                                        <span class="icon"><i class="fas fa-address-card"></i></span>
+                                                        <span>Login as</span>
+                                                    </a>
+                                                    <hr class="dropdown-divider">
+                                                    <a class="dropdown-item is-centered is-danger delete_user" user_id="{{user._id}}">
+                                                        <span class="icon"><i class="fas fa-trash-alt"></i></span>
+                                                        <span>Delete user</span>
+                                                    </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    <p class="is-size-7 has-text-right">Showing {{@if(it.pagination.limit > it.content.total)}}{{it.content.total}}{{#else}}{{it.pagination.limit}}{{/if}} of {{it.content.total}} results</p>
+                    </div>
+                    {{@if(it.pagination.final_page !== 1)}}
+                    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+                        <ul class="pagination-list">
+                            
+                            {{@if( (it.pagination.current) > 2 )}}
+                            <li><a class="pagination-link">1</a></li>
+                            <li><span class="pagination-ellipsis">&hellip;</span></li>
+                            {{/if}}
+
+                            {{@if( (it.pagination.current - 1) > 0 )}}
+                            <li><a class="pagination-link">{{it.pagination.current - 1}}</a></li>
+                            {{/if}}
+
+                            <li><a class="pagination-link is-current">{{it.pagination.current}}</a></li>
+                            
+                            {{@if( (it.pagination.current + 1) < (it.pagination.final_page + 1) )}}
+                            <li><a class="pagination-link">{{it.pagination.current + 1}}</a></li>
+                            {{/if}}
+                            
+                            {{@if( (it.pagination.final_page - it.pagination.current) >= 2 )}}
+                            <li><span class="pagination-ellipsis">&hellip;<span></li>
+                            <li><a class="pagination-link">{{it.pagination.final_page}}</a></li>
+                            {{/if}}
+                        </ul>
+                    </nav>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        
+        {{@includeFile(it.dir + "/views/partials/_global_foot.squirrelly", it)/}}
+
+        <!-- Pagination and search -->
+        <script>
+            (function(){
+                let page_links = $QSA(".pagination-link"),
+                    page_input = $QS('#goto_page'),
+                    main_form  = $QS('form')
+
+                page_links.forEach(pl => {
+                    pl.addEventListener('click', () => {
+                        page_input.value = pl.innerHTML
+                        main_form.submit()
+                    })
+                })
+
+                {{@if(it.search)}}
+                let clear      = $QS('#clearSearch'),
+                    searchbar  = $QS('input[name=search]')
+
+                clear.addEventListener('click', () => {
+                    searchbar.value = ""
+                    $CLASS(clear, 'is-loading', true)
+                    main_form.submit()
+                })
+                {{/if}}
+            })()
+        </script>
+        <!-- Delete user functionality -->
+        <script>
+            (function(){
+                let delete_buttons = $QSA('a.delete_user')
+                delete_buttons.forEach(del => {
+                    let _id = del.getAttribute('user_id')
+                    del.addEventListener('click', () => {
+                        let superPassword = prompt("Please enter the super password to delete this user")
+                        if(superPassword){
+                            showLoading()
+                            $POST('/console/a/deleteUser', { _id, superPassword }, (request, text) => {
+                                hideLoading()
+                                if(request.status == 200){
+                                    window.location.reload()
+                                }
+                                else{
+                                    console.log(request)
+                                    displayMessage("Something went wrong: " + text, "danger", true)
+                                }
+                            })
+                        }
+                    })
+                })
+            })()
+        </script>
+    </body>
+</html>

@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Thank you!</title>
+        {{@includeFile(it.dir + "/views/partials/_tracking_header.squirrelly", it)/}}
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+    </head>
+        <body>
+            <div class="hero is-primary is-medium">
+                <div class="hero-body">
+                </div>
+            </div>
+            <div class="container" style="margin-top:-200px;">
+                <div class="columns">
+                    <div class="column is-4"></div>
+                    <div class="column">
+    
+                        <div class="box">
+    
+                            <div class="block">
+                                <div class="image is-96x96 is-centered">
+                                    <img src="{{it.domain}}/images/logo.svg"/>
+                                </div>
+                            </div>
+
+                            <p class="block title has-text-centered is-size-2">
+                                Thank you!
+                            </p>
+                    
+                            <div class="block is-size-7 has-text-centered">
+                                <p>Thank you for submitting your feedback!<br><br>Your perspective is very important to us.</p>
+                            </div>
+                    
+                            <div class="block is-size-7 has-text-centered">
+                                <p>Sincerely,</p>
+                                <p><b>Your friends at SheetParrot</b></p>
+                            </div>
+    
+                            <div class="block buttons is-centered">
+                                <a class="button is-primary" href="{{it.domain}}/dashboard">Back to dashboard</a>
+                            </div>
+    
+                        </div>
+    
+                    </div>
+                    <div class="column is-4"></div>
+                </div>
+            </div>
+            
+            {{@includeFile(it.dir + "/views/partials/_global_foot.squirrelly", it)/}}
+
+            <script>(function(){fireconfetti()})()</script>
+
+        </body>
+</html>

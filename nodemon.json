@@ -1,0 +1,19 @@
+{
+    "verbose": false,
+    "ignore": [
+        "*.squirrelly",
+        "./public",
+        "./tmp",
+        "./views"
+    ],
+    "watch":[
+        "./index.js",
+        "./utility.js",
+        "./build.js",
+        "./common/**",
+        "./routes/**"
+    ],
+    "ext":"*.js, *.sass, *.json",
+    "signal":"SIGHUP",
+    "exec":"npm start"
+  }

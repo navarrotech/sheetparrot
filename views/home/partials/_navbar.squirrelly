@@ -1,0 +1,137 @@
+<!-- Header -->
+<div class="navigation {{@if(it.url && it.url == '/'}}is-top{{/if}}">
+    <div class="container is-fullhd is-hidden-touch">
+        <div class="navigator">
+            <div class="items">
+                <a class="twobox is-centered" href="{{it.domain}}">
+                    <figure class="image is-48x48 mr-2">
+                        <img src="{{it.domain}}/images/logo.svg" alt/>
+                    </figure>
+                    <p class="logo-text">SheetParrot</p>
+                </a>
+                <a class="item{{@if(it.url && it.url == '/'}} is-active{{/if}}" href="{{it.domain}}">
+                    <span>Home</span>
+                </a>
+                <a class="item{{@if(it.url && it.url == '/create'}} is-active{{/if}}" href="{{it.domain}}/create">
+                    <span>Create</span>
+                </a>
+                <a class="item{{@if(it.url && it.url == '/pricing'}} is-active{{/if}}" href="{{it.domain}}/pricing">
+                    <span>Pricing</span>
+                </a>
+                <a class="item{{@if(it.url && it.url == '/support'}} is-active{{/if}}" href="{{it.domain}}/support">
+                    <span>Support</span>
+                </a>
+            </div>
+            <div class="items">
+                {{@if(!it.user || !it.user.email)}}
+                <a class="item is-borderless" href="{{it.domain}}/login">
+                    <span>Login</span>
+                </a>
+                <div class="is-button">
+                    <a class="button is-primary" href="{{it.domain}}/signup" data-action="signup">
+                        <span>Sign Up</span>
+                    </a>
+                </div>
+                {{#else}}
+                <div class="is-button">
+                    <a class="button is-primary" href="{{it.domain}}/dashboard" data-action="signup">
+                        <span class="icon">
+                            <i class="fas fa-arrow-right"></i>
+                        </span>
+                        <span>My Dashboard</span>
+                    </a>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+    <div class="container mobile-navigator is-hidden-desktop">
+        <div class="twobox also-mobile">
+            <div class="twobox also-mobile is-centered">
+                <div class="image is-48x48">
+                    <img src="{{it.domain}}/images/logo.svg"/>
+                </div>
+                <span class="logo-text">SheetParrot</span>
+            </div>
+            <div class="icon hamburger is-clickable">
+                <i class="fas fa-bars fa-2x"></i>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mobile-hamburger-menu">
+
+    <div class="innerHamburger">
+        <a class="hamburger-item {{@if(it.url && it.url == '/'}}is-active{{/if}}" href="{{it.domain}}">
+            <span class="icon"><i class="fas fa-home"></i></span>
+            <span>Home</span>
+        </a>
+        <a class="hamburger-item {{@if(it.url && it.url == '/create'}}is-active{{/if}}" href="{{it.domain}}/create">
+            <span class="icon"><i class="fas fa-pen-fancy"></i></span>
+            <span>Create</span>
+        </a>
+        <a class="hamburger-item {{@if(it.url && it.url == '/pricing'}}is-active{{/if}}" href="{{it.domain}}/pricing">
+            <span class="icon"><i class="far fa-paper-plane"></i></span>
+            <span>Pricing</span>
+        </a>
+
+        <hr>
+        <a class="hamburger-item {{@if(it.url && it.url == '/support'}}is-active{{/if}}" href="{{it.domain}}/support">
+            <span class="icon"><i class="fas fa-headset"></i></span>
+            <span>Customer Support</span>
+        </a>
+        <a class="hamburger-item" href="{{it.domain}}/terms-of-service" target="_blank">
+            <span class="icon"><i class="far fa-file-alt"></i></span>
+            <span>Legal</span>
+        </a>
+
+        <hr>
+
+        <div class="twobox also-mobile">
+            <a class="hamburger-item is-colorful" href="{{it.domain}}/signup" data-action="signup">
+                <span class="icon"><i class="fas fa-user-plus"></i></span>
+                <span>Signup</span>
+            </a>
+            <a class="hamburger-item is-primary" href="{{it.domain}}/login">
+                <span class="icon"><i class="fas fa-sign-in-alt"></i></span>
+                <span>Login</span>
+            </a>
+        </div>
+        
+    </div>
+
+</div>
+
+<script>
+    (function(){
+        if(window.location.pathname != "/"){ return; }
+
+        let scrolling_element = document.querySelector('html'),
+            navbar = document.querySelector('.navigation')
+        document.addEventListener('scroll', (e) => {
+            let depth = (window.scrollY)
+            if(depth == 0){ navbar.classList.add('is-top'); }
+            else{ navbar.classList.remove('is-top'); }
+        })
+    })();
+</script>
+<script>
+    (function(){
+        let hamburger_icon = document.querySelector('.navigation .hamburger'),
+            hamburger_menu = document.querySelector('.mobile-hamburger-menu'),
+            navigation     = document.querySelector('.navigation')
+
+        if(!hamburger_icon || !hamburger_menu || !navigation){return;}
+        hamburger_icon.addEventListener('click', () => {
+            if(hamburger_menu.classList.contains('is-active')){
+                hamburger_menu.classList.remove('is-active')
+                navigation.classList.remove('hamburger-active')
+                hamburger_menu.querySelector('.innerHamburger').focus()
+            }
+            else {
+                hamburger_menu.classList.add('is-active')
+                navigation.classList.add('hamburger-active')
+            }
+        })
+    })();
+</script>

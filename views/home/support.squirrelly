@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>SheetParrot | The future of homework online</title>
+        {{@includeFile(it.dir + "/views/home/partials/_globalHeader.squirrelly", it)/}}
+        
+        <!-- Page-specific metadata -->
+        <meta property="og:title" content="SheetParrot">
+        <meta property="og:description" content="">
+        <meta class="metaTagTop" name="description" content="">
+    </head>
+
+    <body>
+        {{@includeFile(it.dir + "/views/home/partials/_navbar.squirrelly", it)/}}
+        <div class="navspacer"></div>
+
+        <section class="hero is-large is-colorful has-text-white">
+            <div class="hero-body">
+                <div class="block has-text-centered">
+                    <h1 class="superTitle is-gothambold has-text-white">How Can We Help?</p>
+                    <h2 class="title is-size-6 has-text-white">Message us directly or send us an email, and we're happy to chat together.</h2>
+                </div>
+                <div class="block buttons are-large is-centered equalButtons has-text-weight-medium">
+                    <a class="button is-white copy">support@sheetparrot.com</a>
+                    <a class="button is-white report">Submit A Bug Report</a>
+                    <a class="button is-white message">Message Us</a>
+                </div>
+                <style>.equalButtons .button.is-white{height:fit-content;padding-top:1em;padding-bottom:1em;border-radius:12px;}</style>
+            </div>
+        </section>
+
+        <style>
+            .equalButtons .button{
+                width:22%;
+            }
+            .hero.is-colorful{
+                background: rgb(59,138,250);
+                background: -moz-linear-gradient(223deg, rgba(59,138,250,1) 1%, rgba(165,68,223,1) 50%, rgba(253,64,71,1) 100%);
+                background: -webkit-linear-gradient(223deg, rgba(59,138,250,1) 1%, rgba(165,68,223,1) 50%, rgba(253,64,71,1) 100%);
+                background: linear-gradient(223deg, rgba(59,138,250,1) 1%, rgba(165,68,223,1) 50%, rgba(253,64,71,1) 100%);
+            }
+            @media only screen and (max-width: 768px){
+                .equalButtons .button{ width:100%; }
+            }
+        </style>
+
+        {{@includeFile(it.dir + "/views/home/partials/_footer.squirrelly", it)/}} 
+
+        {{@includeFile(it.dir + "/views/partials/_global_foot.squirrelly", it)/}}
+
+        <script>
+            let copy = $('.equalButtons .copy'),
+                report = $('.equalButtons .report'),
+                message = $('.equalButtons .message')
+
+            copy.click(async  () => {
+                await navigator.clipboard.writeText('support@sheetparrot.com')
+                toast("Copied 'support@sheetparrot.com' to your clipboard!", 'success', true)
+            })
+            report.click(() => {
+                $('#pricing_contactus').addClass('is-active')
+            })
+            message.click(() => {
+                if (window.fcWidget && window.fcWidget.isOpen() != true) { 
+                    window.fcWidget.open();
+                }
+            })
+        </script>
+        <script>cookieBanner();</script>
+    </body>
+</html>

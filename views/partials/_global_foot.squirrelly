@@ -1,0 +1,145 @@
+<!-- Toast 2.0 -->
+<div class="toast"><div id="hermes" style="display:block;"></div></div>
+
+<!-- Font Awesome 6 -->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/js/all.min.js" crossorigin="anonymous" referrerpolicy="no-referrer" async></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/js/all.min.js"  crossorigin="anonymous" referrerpolicy="no-referrer" async></script>
+
+<!-- SheetParrot JS Bundle -->
+<script src="{{it.domain}}/js/SheetParrot.min.js?v={{it.css_version}}"></script>
+
+<!-- 500apps -->
+<script>
+(function(u, t, r, a, c, k) {
+k = t.getElementsByTagName('head')[0];c=t.createElement('script');c.async=1;c.src=r+a;c.onload=()=>{
+u._ut.init('7209776726556503','us1','37');u._ut.setEmail('Please enter email');u._ut.setUserAttributes({'testing':'success'});};
+k.appendChild(c);});(window,document,'https://infinity-public-js.500apps.com/usertracker/','usertracker.min.js');
+</script>
+
+{{@if(it.ENV.DOMAIN.includes('http://localhost'))}}
+<div class="developer tools">
+    <div class="developer toggle">
+        <a class="button is-primary is-rounded is-large p-2">
+            <span class="icon">
+                <i class="fab fa-codepen"></i>
+            </span>
+        </a>
+    </div>
+    <div class="developer toolbar">
+        <div class="twobox px-4">
+            <div class="buttons mb-0">
+                <div class="dropdown is-up mr-2">
+                    <div class="dropdown-trigger">
+                    <button class="button is-dark is-outlined mb-0">
+                        <span>Sheet #1</span>
+                        <span class="icon is-small">
+                            <i class="fas fa-angle-down"></i>
+                        </span>
+                    </button>
+                    </div>
+                    <div class="dropdown-menu">
+                    <div class="dropdown-content">
+                        <a class="dropdown-item is-danger">
+                            <span class="icon">
+                                <i class="fas fa-trash-alt"></i>
+                            </span>
+                            <span>Delete Submissions</span>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a class="dropdown-item" href="{{it.domain}}/sheet/65d4a518-d4d9-4fce-8109-ba4572c42869">
+                            <span class="icon">
+                                <i class="fas fa-street-view"></i>
+                            </span>
+                            <span>Public</span>
+                        </a>
+                        <a class="dropdown-item" href="{{it.domain}}/sheet/view/65d4a518-d4d9-4fce-8109-ba4572c42869">
+                            <span class="icon">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                            <span>Details</span>
+                        </a>
+                        <a class="dropdown-item" href="{{it.domain}}/sheet/v2/edit?sheetid=65d4a518-d4d9-4fce-8109-ba4572c42869">
+                            <span class="icon">
+                                <i class="fas fa-hammer"></i>
+                            </span>
+                            <span>Editor</span>
+                        </a>
+                        <a class="dropdown-item" href="{{it.domain}}/grade?i=65d4a518-d4d9-4fce-8109-ba4572c42869">
+                            <span class="icon">
+                                <i class="fas fa-pen-fancy"></i>
+                            </span>
+                            <span>Grader</span>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+                <div class="dropdown is-up mr-2">
+                    <div class="dropdown-trigger">
+                    <button class="button is-dark is-outlined mb-0">
+                        <span>Sheet #2</span>
+                        <span class="icon is-small">
+                            <i class="fas fa-angle-down"></i>
+                        </span>
+                    </button>
+                    </div>
+                    <div class="dropdown-menu">
+                    <div class="dropdown-content">
+                        <a class="dropdown-item is-danger">
+                            <span class="icon">
+                                <i class="fas fa-trash-alt"></i>
+                            </span>
+                            <span>Delete Submissions</span>
+                        </a>
+                        <hr class="dropdown-divider">
+                        <a class="dropdown-item" href="{{it.domain}}/sheet/f9740c40-c698-4843-abd1-338f6d0eca57">
+                            <span class="icon">
+                                <i class="fas fa-street-view"></i>
+                            </span>
+                            <span>Public</span>
+                        </a>
+                        <a class="dropdown-item" href="{{it.domain}}/sheet/view/f9740c40-c698-4843-abd1-338f6d0eca57">
+                            <span class="icon">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                            <span>Details</span>
+                        </a>
+                        <a class="dropdown-item" href="{{it.domain}}/sheet/v2/edit?sheetid=f9740c40-c698-4843-abd1-338f6d0eca57">
+                            <span class="icon">
+                                <i class="fas fa-hammer"></i>
+                            </span>
+                            <span>Editor</span>
+                        </a>
+                        <a class="dropdown-item" href="{{it.domain}}/grade?i=f9740c40-c698-4843-abd1-338f6d0eca57">
+                            <span class="icon">
+                                <i class="fas fa-pen-fancy"></i>
+                            </span>
+                            <span>Grader</span>
+                        </a>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="buttons mb-0">
+                {{@if(it.authorized)}}
+                <div class="mr-4">
+                    <p>{{it.user.email}}</p>
+                </div>
+                <a class="button is-primary mb-0 mr-2">
+                    <span>Swap users</span>
+                    <span class="icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </span>
+                </a>
+                <a class="button is-primary mb-0 mr-2" href="{{it.domain}}/session" target="_blank">
+                    <span>View Session</span>
+                    <span class="icon">
+                        <i class="fas fa-layer-group"></i>
+                    </span>
+                </a>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</div>
+<script>$(`.developer.toggle .button`).click(()=>$(`.developer.tools`).toggleClass('is-active'))</script>
+{{/if}}

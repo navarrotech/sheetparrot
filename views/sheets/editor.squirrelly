@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Edit Sheet</title>
+        {{@includeFile(it.dir + "/views/partials/_tracking_header.squirrelly", it)/}}
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+    </head>
+    <body>
+
+        <div class="view">
+
+            <div class="editor_navbar">
+                <div class="container is-fullhd">
+                    <div class="twobox is-spaced">
+                        <div class="buttons is-centered-mobile mb-0 no-icons-mobile has-addons-mobile-only" id="edit_tools"></div>
+                        <div class="field has-addons">
+                            <div class="control">
+                                <a class="button is-softwhite" action="preview">
+                                    <span class="icon">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </span>
+                                    <span>Preview</span>
+                                </a>
+                            </div>
+                            <div class="control">
+                                <div class="dropdown">
+                                    <div class="dropdown-trigger">
+                                        <a class="button">
+                                            <span class="icon">
+                                                <i class="fas fa-share-nodes" aria-hidden="true"></i>
+                                            </span>
+                                            <span>Share</span>
+                                        </a>
+                                    </div>
+                                    <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                        <div class="dropdown-content">
+                                            <a href="{{it.domain}}/sheet/{{it.sheet._id}}" target="_blank" class="dropdown-item">
+                                                <span class="icon-text">
+                                                    <span class="icon"><i class="fas fa-up-right-from-square"></i></span>
+                                                    <span>New Tab</span>
+                                                </span>
+                                            </a>
+                                            <a data-copy="{{it.domain}}/sheet/{{it.sheet._id}}" data-show-success="true" class="dropdown-item">
+                                                <span class="icon-text">
+                                                    <span class="icon"><i class="fas fa-link"></i></span>
+                                                    <span>Copy Link</span>
+                                                </span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="control">
+                                <a class="button is-primary" action="save">
+                                    <span class="icon is-small"><i class="fas fa-save"></i></span>
+                                    <span>Save</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor_navbar_spacer"></div>
+
+            <div class="editor">
+                <div class="loader is-medium"></div>
+            </div>
+        </div>
+
+
+        {{@includeFile(it.dir + "/views/partials/_global_foot.squirrelly", it)/}}
+
+        <script>
+            const _ID = "{{it.sheet._id}}";
+            var default_brand = "{{it.default_brand}}";
+            var default_logo = "{{it.default_logo}}";
+        </script>
+
+        <script src="{{it.domain}}/js/sheets/editor.js"></script>
+        <script>
+            $('[data-copy]').click(function() {
+                let target = $(this)
+                navigator.clipboard.writeText( target.attr('data-copy') )
+                if(target.attr('data-show-success')){
+                    target.addClass('is-success')
+                    target.find('span.icon').html(`<i class="fas fa-check"></i>`)
+                    setTimeout(() => {
+                        target.removeClass('is-success')
+                        target.find('span.icon').html(`<i class="fas fa-link"></i>`)
+                    }, 1500)
+                }
+            });</script>
+    </body>
+</html>

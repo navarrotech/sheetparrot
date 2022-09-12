@@ -1,0 +1,108 @@
+<!-- // Begin Global Code // -->
+<meta content="utf-8" http-equiv="encoding"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+{{@if(!it.skipMeta)}}
+
+<!-- Metadata -->
+<link rel="icon" type="image/png" href="{{it.domain}}/images/logo.svg">
+<meta class="metaTagTop" name="description" content="">
+<meta class="metaTagTop" name="keywords" content="SheetParrot">
+<meta class="metaTagTop" name="author" content="SheetParrot">
+<meta class="metaTagTop" property="og:image" content="{{it.domain}}/images/logo.svg" id="social-image">
+<meta property="og:title" content="SheetParrot">
+<meta property="og:description" content="">
+<meta property="og:url" content="{{it.requesting_url}}">
+<meta property="og:type" content="website">
+
+{{/if}}
+
+<!-- Google Authentication -->
+<meta name="google-signin-client_id" content="{{it.ENV.GOOGLE_CLIENT_ID}}">
+
+{{@if(!it.ENV.DOMAIN.includes('http://localhost'))}}
+{{@if(it.user && it.user.first_name && it.user.email)}}
+<!-- Authenticated Freshchat Session -->
+<script>
+    function initFreshChat() {
+    window.fcWidget.init({
+        token: "26706b0c-94f6-461f-8670-fcb59e53f37d",
+        host: "https://wchat.freshchat.com",
+        firstName: "{{it.user.first_name}}",
+        lastName: "{{it.user.last_name}}",
+        email: "{{it.user.email}}",
+        plan: "{{it.user.preferences.billing.plan}}"
+    });
+    }
+console.log("Freshchat: Successfully authenticated session")
+</script>
+{{#else}}
+
+<!-- Unauthenticated Freshchat Session -->
+<script>
+function initFreshChat() {
+    window.fcWidget.init({
+    token: "26706b0c-94f6-461f-8670-fcb59e53f37d",
+    host: "https://wchat.freshchat.com",
+    });
+}
+console.warn("Freshchat: Anonymous session actived")
+</script>
+{{/if}}
+<!-- FreshChat Initialization -->
+<script>function initialize(i,t){var e;i.getElementById(t)?initFreshChat():((e=i.createElement("script")).id=t,e.async=!0,e.src="https://wchat.freshchat.com/js/widget.js",e.onload=initFreshChat,i.head.appendChild(e))}function initiateCall(){initialize(document,"Freshdesk Messaging-js-sdk")}window.addEventListener?window.addEventListener("load",initiateCall,!1):window.attachEvent("load",initiateCall,!1);</script>
+{{/if}}
+
+{{@if(!it.domain.includes('localhost'))}}
+<!-- RayGun
+<script type="text/javascript">
+!function(a,b,c,d,e,f,g,h){a.RaygunObject=e,a[e]=a[e]||function(){
+(a[e].o=a[e].o||[]).push(arguments)},f=b.createElement(c),g=b.getElementsByTagName(c)[0],
+f.async=1,f.src=d,g.parentNode.insertBefore(f,g),h=a.onerror,a.onerror=function(b,c,d,f,g){
+h&&h(b,c,d,f,g),g||(g=new Error(b)),a[e].q=a[e].q||[],a[e].q.push({
+e:g})}}(window,document,"script","//cdn.raygun.io/raygun4js/raygun.min.js","rg4js");
+</script>
+<script type="text/javascript">
+rg4js('apiKey', '{{it.RAYGUN_API_KEY}}');
+rg4js('enableCrashReporting', true);
+</script>
+{{@if(it.user && it.user.name && it.user.email)}}
+<script type="text/javascript">
+    try{
+    rg4js('setUser', {
+        identifier: '{{it.user.email}}',
+        isAnonymous: false,
+        email: '{{it.user.email}}',
+        firstName: '{{it.user.first_name}}',
+        fullName: '{{it.user.name}}'
+    });
+    rg4js('enablePulse', true); // Enables Real User Monitoring
+    }
+    catch(e){
+        console.log("Unable to initialize RayGun Session on this page!")
+    }
+</script>-->
+{{#else}}
+<script type="text/javascript">
+    rg4js('setUser', { isAnonymous: true });
+</script>
+{{/if}}
+{{/if}}
+
+<!-- SheetParrot CSS -->
+<link rel="stylesheet" href="{{it.domain}}/css/SheetParrot.min.css?version={{it.css_version}}">
+
+<!-- Fonts: Cabin, Montserrat, Poppins, Quicksand, PT Mono and Roboto-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=PT+Mono&display=swap" rel="stylesheet">
+
+<script>
+    const _DOMAIN = "{{it.domain}}";
+    const _EMAIL = "{{@if(it.authorized)}}{{it.user.email}}{{#else}}anonymous{{/if}}";
+    const _ENV = "{{it.ENV.NODE_ENV}}";
+    var AUTHORIZED = "{{it.authorized}}" == "true" ? true : false;
+    const _PLAN = "{{@if(it.authorized && it.user)}}{{@if(it.user.is_vip == true)}}professional{{#else}}{{it.user.preferences.billing.plan}}{{/if}}{{/if}}"
+    const _PROFILE_PICTURE = "{{@if(it.authorized)}}{{it.user.profile_picture}}{{#else}}{{it.domain}}/images/{{/if}}";
+</script>
+<!-- // End Global Code // -->

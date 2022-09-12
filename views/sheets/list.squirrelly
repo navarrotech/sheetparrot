@@ -1,0 +1,211 @@
+<!doctype html>
+<html>
+    <head>
+        <title>SheetParrot | My Sheets</title>
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+        {{@includeFile(it.dir + "/views/partials/_tracking_header.squirrelly", it)/}}
+        
+        <style>
+            .parrotTiles:not(.is-tableview) .parrotTile{ border:unset; }
+            .parrotTile:hover{transform:unset!important;}
+            .parrotTile > .titles .title, .parrotTile > .titles .subtitle{
+                text-overflow:ellipsis;
+                overflow:hidden;
+                white-space: nowrap;
+                line-height: 1.3;
+            }
+            input.special_input{
+                background:transparent;
+                width:100%;
+                border:2px solid transparent;
+                border-radius:3px;
+                cursor:text;
+                font-size:16px;
+                margin:-0.25em 0 1.3em -0.25em;
+                transition:all 0.3s ease;
+            }
+            input.special_input:hover{
+                background:rgba(255,255,255,0.1)
+            }
+            input.special_input:focus{
+                color:black!important;
+                border:2px solid #3BD0FD;
+                outline:none;
+                background:white;
+            }
+            
+            .folders .folder .folder_name{
+                max-width:calc(100% - 2em);
+                overflow:hidden;
+                white-space:nowrap;
+                text-overflow: ellipsis;
+            }
+            .folders input.special_input{
+                margin:0;
+                width:calc(100% - 1.75em);
+                max-width:calc(100% - 1.75em);
+            }
+
+            .container.is-bottom{ margin-bottom:300px; }
+
+            .master{ 
+                text-align:center; 
+                max-width:650px; 
+                display:block; 
+                margin:0 auto;
+            }
+            .master .titles{
+                padding:1.2em 0;
+            }
+            .master iframe, .master iframe * { border-radius:15px; }
+        </style>
+    </head>
+    <body>
+        <div class="view">
+            
+            <div class="app_view">
+                
+                <!-- Folderpicker parent -->
+                <div id="folderParent"></div>
+
+                <!-- Confirm sheet deletion popup -->
+                <div class="modal" id="confirmDelete">
+                    <div class="modal-background"></div>
+                    <div class="modal-card">
+                        <header class="modal-card-head">
+                            <p class="modal-card-title">Delete a sheet</p>
+                            <button class="delete" aria-label="close"></button>
+                        </header>
+                        <section class="modal-card-body">
+                            <h1 class="title block is-size-3">Are you sure you want to delete this sheet?</h1>
+                            <h2 class="subtitle block is-size-5">This action can NOT be undone!</h2>
+                            <hr>
+                            <p class="block">You are about to delete your sheet: &quot;<b><span id="confirmDeleteSheetName"></span></b>.&quot;</p>
+                            <p class="block">This will also delete all past submissions, assignments/deadlines, and questions. <b>Nobody will be able to access this sheet after it has been deleted.</b></p>
+                        </section>
+                        <footer class="modal-card-foot buttons is-right">
+                            <button class="button is-light" aria-label="close">Cancel</button>
+                            <button class="button is-danger delete_button">Delete</button>
+                        </footer>
+                    </div>
+                </div>
+
+                <!-- Payment required popup -->
+                <div class="modal is-small" id="payment_modal">
+                    <div class="modal-background"></div>
+                    <div class="modal-card">
+                        <header class="modal-card-head">
+                        <p class="modal-card-title">Plan Limit Exceeded!</p>
+                        <button class="delete" aria-label="close"></button>
+                        </header>
+                        <section class="modal-card-body">
+                            <h1 class="title has-text-centered" style="font-size:65px !important;">100%</h1>
+                            <p class="subtitle is-size-5 has-text-centered">of your sheet limit reached!</p>
+
+                            <hr>
+
+                            <p class="mb-2 is-size-6 has-text-centered"><strong>You have created {{it.user.preferences.usage.sheet_usage}} sheets<br>of your {{it.user.preferences.usage.sheet_limit}} monthly sheet limit.</strong></p>
+                            <p class="mb-2 is-size-6 has-text-centered">Your usage will reset on {{new Date(it.user.preferences.billing.plan_renews).toDateString()}}.</p>
+                            <p class="mb-2 is-size-6 has-text-centered">You can either wait until then and you'll get {{it.user.preferences.usage.sheet_limit}} more sheets to create for the month, or you can upgrade your plan to meet your needs.</p>
+                            
+                        </section>
+                        <footer class="modal-card-foot buttons is-centered"> 
+                            <a class="button" aria-label="close">Close</a>
+                            <a class="button is-success" href="{{it.domain}}/billing/plans">View Plans</a>
+                        </footer>
+                    </div>
+                </div>
+                
+                {{@includeFile(it.dir + "/views/partials/_header.squirrelly", it)/}}
+                <div class="app_content">
+                    {{@includeFile(it.dir + "/views/partials/_notifications.squirrelly", it)/}}
+                    
+                    <!-- Header -->
+                    <div class="container mt-6 is-hidden" id="header_items">
+                        <div class="twobox mb-4">
+                            <div>
+                                <h1 class="title is-size-2 has-text-centered-mobile">My Worksheets</h1>
+                                {{@if(it.user.preferences.billing.plan == 'free')}}
+                                <h2 class="subtitle is-size-7 has-text-centered-mobile">{{it.user.preferences.usage.sheet_usage}} sheet created this month, of your plan's {{it.user.preferences.usage.sheet_limit}} sheet limit.</h2>
+                                {{#else}}
+                                <h2 class="subtitle is-size-7 has-text-centered-mobile">Create An Unlimited Amount Of Sheets</h2>
+                                {{/if}}
+                            </div>
+                            <!-- Create -->
+                            <div class="dropdown is-right">
+                                <div class="dropdown-trigger">
+                                    <a class="button is-primary">
+                                        <span>Create New</span>
+                                        <span class="icon is-small">
+                                            <i class="fas fa-angle-down"></i>
+                                        </span>
+                                    </a>
+                                    </div>
+                                <div class="dropdown-menu"  role="menu">
+                                    <div class="dropdown-content">
+                                        <a href="#" class="dropdown-item" data-action="create-folder">
+                                            <span class="icon"><i class="fas fa-folder-plus"></i></span>
+                                            <span>New Folder</span>
+                                        </a>
+                                        <a class="dropdown-item" data-action="create-new">
+                                            <span class="icon"><i class="far fa-file"></i></span>
+                                            <span>New Worksheet</span>
+                                        </a>
+                                        {{@if(it.ENV.NODE_ENV == "development")}}
+                                        <hr class="dropdown-divider">
+                                        <a class="dropdown-item" id="refresh">
+                                            <span class="icon"><i class="fas fa-sync"></i></span>
+                                            <span>Refresh</span>
+                                        </a>
+                                        {{/if}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="container is-bottom mt-4">
+                        
+                        <nav class="breadcrumb has-arrows-separator is-hidden" aria-label="breadcrumbs"><ul></ul></nav>
+
+                        <div id="subfolders" class="folders"></div>
+
+                        <div id="parent" class="parrotTiles"></div>
+
+                        <div class="loader is-medium loading_gif"></div>
+
+                        <div id="no_worksheets" class="master is-hidden">
+                            <div class="unlock_video">
+                                <figure class="image is-16by9">
+                                    <iframe class="has-ratio" width="560" height="315" data-src="https://player.vimeo.com/video/640486262" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </figure>
+                                <div class="titles">
+                                    <h1 class="title is-size-1"><b>No sheets have been created yet.</b></h1>
+                                    <h2 class="subtitle is-size-5">Create your first sheet and watch the magic happen!</h2>
+                                </div>
+                                <a class="button is-primary create" data-action="create-new" style="padding-left:2.5em; padding-right:2.5em; height:2.6em;">Create Your First Sheet</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+     
+        {{@includeFile(it.dir + "/views/partials/_global_foot.squirrelly", it)/}}
+
+        <script>initModal('confirmDelete');initModal("payment_modal");</script>
+
+        <script src="{{it.domain}}/js/sheets/list.js"></script>
+        <!-- "Do not track" settings -->
+        <script>
+            let iframes = document.querySelectorAll('iframe')
+            iframes.forEach(frame => {
+                let src = frame.getAttribute('data-src')
+                frame.removeAttribute('data-src')
+                if(localStorage && localStorage.getItem('cookie_analytics_disabled') == 'true'){ src += '&dnt=true' }
+                frame.setAttribute('src', src)
+            })
+        </script>
+    </body>
+</html>

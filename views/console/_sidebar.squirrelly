@@ -1,0 +1,51 @@
+<div class="sidebar">
+    <a class="sidebar_item{{@if(it.requesting_page == '/')}} is-active{{/if}}"href="{{it.domain}}/console">
+        <span class="icon">
+            <i class="fas fa-tachometer-alt fa-lg"></i>
+        </span>
+        <span>Dashboard</span>
+    </a>
+    <a class="sidebar_item{{@if(it.requesting_page.startsWith('/users'))}} is-active{{/if}}" href="{{it.domain}}/console/users">
+        <span class="icon">
+            <i class="fas fa-users fa-lg"></i>
+        </span>
+        <span>Users</span>
+    </a>
+    <a class="sidebar_item{{@if(it.requesting_page.startsWith('/sheets'))}} is-active{{/if}}" href="{{it.domain}}/console/sheets">
+        <span class="icon">
+            <i class="fas fa-paper-plane fa-lg"></i>
+        </span>
+        <span>Sheets</span>
+    </a>
+    <a class="sidebar_item{{@if(it.requesting_page.startsWith('/reports'))}} is-active{{/if}}" href="{{it.domain}}/console/reports">
+        <span class="icon">
+            <i class="fas fa-file fa-lg"></i>
+        </span>
+        <span>Reports</span>
+    </a>
+    <a class="sidebar_item{{@if(it.requesting_page.startsWith('/tools'))}} is-active{{/if}}" href="{{it.domain}}/console/tools">
+        <span class="icon">
+            <i class="fas fa-tools fa-lg"></i>
+        </span>
+        <span>Tools</span>
+    </a>
+    <a class="sidebar_item{{@if(it.requesting_page.startsWith('/server'))}} is-active{{/if}}" href="{{it.domain}}/console/server">
+        <span class="icon">
+            <i class="fas fa-server fa-lg"></i>
+        </span>
+        <span>Server</span>
+    </a>
+    <hr>
+    <a class="sidebar_item" href="{{it.domain}}/dashboard">
+        <span class="icon">
+            <i class="fas fa-network-wired fa-lg"></i>
+        </span>
+        <span>Exit the console</span>
+    </a>
+    <a class="sidebar_item" href="{{it.domain}}/logout">
+        <span class="icon">
+            <i class="fas fa-sign-out-alt fa-lg"></i>
+        </span>
+        <span>Logout</span>
+    </a>
+</div>

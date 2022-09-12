@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="utf-8" http-equiv="encoding"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>SheetParrot | Create Virtual Homework Online</title>
+
+        <!-- Metadata -->
+        <link rel="icon" type="image/png" href="{{it.domain}}/images/logo.svg">
+        <meta class="metaTagTop" name="description" content="">
+        <meta class="metaTagTop" name="keywords" content="sheetparrot,homework,sheets,online homework">
+        <meta class="metaTagTop" name="author" content="SheetParrot">
+        <meta class="metaTagTop" property="og:image" content="{{it.domain}}/images/logo.svg" id="social-image">
+        <meta property="og:title" content="SheetParrot">
+        <meta property="og:description" content="">
+        <meta property="og:url" content="{{it.domain}}">
+        <meta property="og:type" content="website">
+
+        <link rel="stylesheet" href="{{it.domain}}/css/SheetParrot.min.css?version={{it.css_version}}">
+        <style>
+            /* <-- Home 2.0 --> */
+            .section{
+                overflow:hidden;
+            }
+            .section.top{
+                min-height: 85vh;
+                display: -webkit-flex;
+                display: flex;
+                -webkit-align-items: center;
+                align-items: center;
+            }
+            .section.top .logo-text{
+                font-size:30px;
+            }
+            .section.top .container{
+                padding-bottom:10vh;
+            }
+            .title.superSize1{
+                font-size:4em;
+                font-weight:400;
+            }
+            .section .spread{
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-size: cover;
+                background-attachment: fixed;
+                opacity: .075;
+                -webkit-animation-duration: 2s;
+                animation-duration: 2s;
+                -webkit-animation-delay: 1s;
+                animation-delay: 1s;
+                transition-timing-function: ease-in;
+                -webkit-animation-fill-mode: both;
+                animation-fill-mode: both;
+                -webkit-animation-name: fadeSpread;
+                animation-name: fadeSpread;
+            }
+            .section .sep-dual{
+                position: absolute !important;
+                left: 50%;
+                top: 100%;
+            }
+            .sep-dual:before, .sep-dual:after {
+                content: ' ';
+                display: block;
+                position: absolute;
+                bottom: -250px;
+                left: -1500px;
+                z-index: 2;
+                background: white;
+                width: 3000px;
+                height: 250px;
+                -webkit-transform: rotate(-7deg);
+                transform: rotate(-7deg);
+            }
+            .sep-dual:after {
+                -webkit-transform: rotate(7deg);
+                transform: rotate(7deg);
+            }
+            .section .downArrow {
+                color:white;
+                margin: 0 auto;
+                position: absolute;
+                bottom: 18px;
+                left: 50%;
+            }
+            .section .pictureGrid{
+                position: absolute;
+                top: 75px;
+                right: -20px;
+                text-align: left;
+                -webkit-transform: skew(15deg,-3deg);
+                transform: skew(15deg,-3deg);
+                transition: -webkit-transform 1s ease-in-out;
+                transition: transform 1s ease-in-out;
+                transition: transform 1s ease-in-out,-webkit-transform 1s ease-in-out;
+                -webkit-transform-origin: 100% 30%;
+                transform-origin: 100% 30%;
+            }
+            .section .pictureGrid .pictureGrid-img {
+                position: relative;
+                border: 2px solid rgba(0,0,0,0.1);
+                border-radius: 4px;
+                display: inline-block;
+                margin-right: 20px;
+                margin-bottom: 20px;
+                -webkit-animation: fadeIn 2s forwards;
+                animation: fadeIn 2s forwards;
+            }
+            .section .pictureGrid .pictureGrid-space {
+                display: inline-block;
+                width: 64px;
+            }
+            .section .pictureGrid .pictureGrid-img:nth-child(3) {
+                -webkit-animation-delay: 2s;
+                animation-delay: 2s;
+            }
+            .section .pictureGrid .pictureGrid-img.odd {
+                top: 15px;
+            }
+
+            .section .pictureGrid .pictureGrid-img:nth-child(4) {
+                -webkit-animation-delay: 3s;
+                animation-delay: 3s;
+            }
+            .section.second{
+                z-index:2;
+                background: white;
+            }
+        </style>
+        <script>
+            const _ENV = "{{it.ENV.NODE_ENV}}";
+            const _DOMAIN = "{{it.domain}}";
+            var AUTHORIZED = "{{it.authorized}}" == "true" ? true : false;
+            const _PLAN = "{{@if(it.authorized && it.user)}}{{it.user.preferences.billing.plan}}{{/if}}"
+            const _EMAIL = "{{@if(it.authorized)}}{{it.user.email}}{{#else}}anonymous{{/if}}";
+        </script>
+    </head>
+
+    <body>
+
+        {{@includeFile(it.dir + "/views/home/partials/_navbar2.squirrelly", it)/}} 
+
+        <section class="section top is-colorful">
+            <div class="spread" style="background-image:url(https://static-assets.strikinglycdn.com/images/landing4/spread.jpg)"></div>
+            <div class="pictureGrid">
+                <div class="pictureGrid-parallax">
+                <div class="pictureGrid-space"></div>
+                <div class="pictureGrid-space"></div>
+                <img class="pictureGrid-img lazy lazyloaded" data-original="https://static-assets.strikinglycdn.com/images/landing4/screenshots/naked.jpg" style="height: auto; display: inline-block; max-height: 180px;" src="https://static-assets.strikinglycdn.com/images/landing4/screenshots/naked.jpg">
+                <img class="pictureGrid-img lazy odd lazyloaded" data-original="https://static-assets.strikinglycdn.com/images/landing4/screenshots/ribbon.jpg" style="height: auto; display: inline-block; max-height: 180px;" src="https://static-assets.strikinglycdn.com/images/landing4/screenshots/ribbon.jpg">
+                <br>
+                <div class="pictureGrid-space"></div>
+                <img class="pictureGrid-img lazy lazyloaded" data-original="https://static-assets.strikinglycdn.com/images/landing4/screenshots/fire-panda.jpg" style="height: auto; display: inline-block; max-height: 180px;" src="https://static-assets.strikinglycdn.com/images/landing4/screenshots/fire-panda.jpg">
+                <img class="pictureGrid-img lazy odd lazyloaded" data-original="https://static-assets.strikinglycdn.com/images/landing4/screenshots/unibedroombox.jpg" style="height: auto; display: inline-block; max-height: 180px;" src="https://static-assets.strikinglycdn.com/images/landing4/screenshots/unibedroombox.jpg">
+                <br>
+                <img class="pictureGrid-img lazy lazyloaded" data-original="https://static-assets.strikinglycdn.com/images/landing4/screenshots/martin-hamelin.jpg" style="height: auto; display: inline-block; max-height: 180px;" src="https://static-assets.strikinglycdn.com/images/landing4/screenshots/martin-hamelin.jpg">
+                <img class="pictureGrid-img lazy odd lazyloaded" data-original="https://static-assets.strikinglycdn.com/images/landing4/screenshots/karenlo.jpg" style="height: auto; display: inline-block; max-height: 180px;" src="https://static-assets.strikinglycdn.com/images/landing4/screenshots/karenlo.jpg">
+                </div>
+            </div>
+            <div class="container is-max-widescreen">
+                <div class="field">
+                    <a class="twobox is-centered is-left" href="{{it.domain}}">
+                        <figure class="image is-40x40 mr-2">
+                            <img src="{{it.domain}}/images/logo.svg" alt/>
+                        </figure>
+                        <p class="logo-text has-text-white">SheetParrot</p>
+                    </a>
+                </div>
+                <div class="block">
+                    <h1 class="title has-text-white superSize1">Create homework in minutes</h1>
+                </div>
+                <div class="block has-text-white is-size-3">
+                    <p>Build your brand. Conquer the world.</p>
+                    <p>Zero code or design skills required.</p>
+                </div>
+                <div class="field buttons">
+                    <a class="button is-primary mr-3 is-normal" href="{{it.domain}}/signup">
+                        <span>Get Started For Free</span>
+                    </a>
+                    <a class="button is-light is-normal" href="{{it.domain}}/create">
+                        <span>Try Our Free Demo</span>
+                        <span class="icon">
+                            <i class="fas fa-desktop"></i>
+                        </span>
+                    </a>
+                </div>
+            </div>
+            <div class="sep-dual sep-gray"></div>
+            <div class="downArrow">
+                <i class="fas fa-angle-down"></i>
+            </div>
+        </section>
+
+        <section class="section second">
+            <h1 class="title is-size-1 has-text-centered is-spaced">Trusted by millions of teachers and schools</h1>
+            <h2 class="subtitle is-size-5 has-text-centered">Creating homework has never been easier.</h2>
+        </section>
+
+        <!-- Pricing -->
+        <section class="section is-pricing">
+            {{@includeFile(it.dir + "/views/partials/_pricing.squirrelly", it)/}}
+        </section>
+        
+        {{@includeFile(it.dir + "/views/home/partials/_footer.squirrelly", it)/}}
+
+        <footer>
+            {{@includeFile(it.dir + "/views/partials/_global_foot.squirrelly", it)/}}
+
+            <script>let p = new Pricing("NONE");</script>
+
+            <!-- Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-213698949-1"></script>
+            <script>
+                window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-213698949-1');
+            </script>
+
+            <!-- Mouseflow -->
+            <script type="text/javascript">
+                setTimeout(() => {
+                    window._mfq = window._mfq || [];
+                    (function() {
+                        var mf = document.createElement("script");
+                        mf.type = "text/javascript"; mf.defer = true;
+                        mf.src = "https://cdn.mouseflow.com/projects/c0be60ab-6b66-437b-b660-cb5df4efcb82.js";
+                        document.getElementsByTagName("head")[0].appendChild(mf);
+                    })();
+                    }, 5000)
+            </script>
+
+            <!-- Facebook Pixel -->
+            <script>
+                !function(f,b,e,v,n,t,s)
+                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                n.queue=[];t=b.createElement(e);t.async=!0;
+                t.src=v;s=b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t,s)}(window, document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+                fbq('init', '4460361337418599');
+                fbq('track', 'PageView');
+            </script>
+            <noscript>
+                <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=4460361337418599&ev=PageView&noscript=1"/>
+            </noscript>
+            
+            {{@if(it.authorized)}}
+            <script>
+                /* <!-- Authenticated Freshchat Session --> */
+                function initFreshChat() {
+                    window.fcWidget.init({
+                        token: "26706b0c-94f6-461f-8670-fcb59e53f37d",
+                        host: "https://wchat.freshchat.com",
+                        firstName: "{{it.user.first_name}}",
+                        lastName: "{{it.user.last_name}}",
+                        email: "{{it.user.email}}",
+                        plan: "{{it.user.preferences.billing.plan}}"
+                    });
+                }
+                setTimeout(() => { function initialize(i,t){var e;i.getElementById(t)?initFreshChat():((e=i.createElement("script")).id=t,e.async=!0,e.src="https://wchat.freshchat.com/js/widget.js",e.onload=initFreshChat,i.head.appendChild(e))}function initiateCall(){initialize(document,"Freshdesk Messaging-js-sdk")}window.addEventListener?window.addEventListener("load",initiateCall,!1):window.attachEvent("load",initiateCall,!1); })
+            </script>
+            {{#else}}
+            <script>
+                /* <!-- Unauthenticated Freshchat Session --> */
+                function initFreshChat() {
+                    window.fcWidget.init({
+                        token: "26706b0c-94f6-461f-8670-fcb59e53f37d",
+                        host: "https://wchat.freshchat.com",
+                    });
+                }
+                console.warn("Freshchat: Anonymous session mode")
+                setTimeout(() => { function initialize(i,t){var e;i.getElementById(t)?initFreshChat():((e=i.createElement("script")).id=t,e.async=!0,e.src="https://wchat.freshchat.com/js/widget.js",e.onload=initFreshChat,i.head.appendChild(e))}function initiateCall(){initialize(document,"Freshdesk Messaging-js-sdk")}window.addEventListener?window.addEventListener("load",initiateCall,!1):window.attachEvent("load",initiateCall,!1); })
+            </script>
+            {{/if}}
+
+            <script>establishReferrer();</script>
+            <script>cookieBanner();</script>
+            <script>
+                let iframes = document.querySelectorAll('iframe')
+                iframes.forEach(frame => {
+                    let src = frame.getAttribute('data-src')
+                    frame.removeAttribute('data-src')
+                    if(localStorage && localStorage.getItem('cookie_analytics_disabled') == 'true'){ src += '&dnt=true' }
+                    frame.setAttribute('src', src)
+                })
+            </script>
+
+            <!-- Fonts: Cabin, Montserrat, Poppins, Quicksand, PT Mono and Roboto-->
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=PT+Mono&display=swap" rel="stylesheet">
+            
+        </footer>
+
+    </body>
+</html>

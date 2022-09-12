@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Your Dashboard</title>
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+        {{@includeFile(it.dir + "/views/partials/_tracking_header.squirrelly", it)/}}
+    </head>
+    <body>
+
+        <div class="view">
+            
+            <div class="app_view">
+                
+                {{@includeFile(it.dir + "/views/partials/_header.squirrelly", it)/}}
+
+                <div class="app_content">
+                    {{@includeFile(it.dir + "/views/partials/_notifications.squirrelly", it)/}}
+                    
+                    <section class="section">
+                        <div class="block container is-bottom">
+                            <div id="content"><div class="loader is-medium"></div></div>
+                        </div>
+                    </section>
+                    
+                </div>
+            </div>
+        </div>
+     
+        {{@includeFile(it.dir + "/views/partials/_global_foot.squirrelly", it)/}}
+
+        <script src="{{it.domain}}/js/dashboard/main.js"></script>
+    </body>
+</html>

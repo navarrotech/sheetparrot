@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+    <head>
+        <title>SheetParrot | Profile</title>
+        {{@includeFile(it.dir + "/views/partials/_tracking_header.squirrelly", it)/}}
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+    </head>
+    <body>
+        <div class="view">
+            
+            <div class="app_view">
+                {{@includeFile(it.dir + "/views/partials/_header.squirrelly", it)/}}
+                <div class="app_content">
+                    {{@includeFile(it.dir + "/views/partials/_notifications.squirrelly", it)/}}
+
+                    <div class="container is-fullhd mt-4 is-bottom">
+
+                        <div class="block">
+                            <h1 class="title">
+                                <span class="icon mr-2"><i class="fas fa-user"></i></span>
+                                <span>Account Settings</span>
+                            </h1>
+                        </div>
+
+                        <div class="block">
+                            <div class="columns">
+                                <div class="column is-one-third">
+                                    <div class="box" id="sidebar">
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <div class="box" id="root">
+                                        <div class="mt-6">
+                                            <div class="loader is-medium"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {{@includeFile(it.dir + "/views/partials/_global_foot.squirrelly", it)/}}
+
+                <script src="{{it.domain}}/js/vendor/qrcode.min.js"></script>
+                <script src="{{it.domain}}/js/authentication/settings.js"></script>
+
+            </div>
+        </div>
+    </body>
+</html>

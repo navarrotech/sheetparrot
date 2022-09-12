@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Testing</title>
+        {{@includeFile(it.dir + "/views/partials/_tracking_header.squirrelly", it)/}}
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+    </head>
+    <body>
+        {{@includeFile(it.dir + "/views/partials/_global_foot.squirrelly", it)/}}
+        <div class="view">
+            
+        </div>
+        <script>
+            if(!window.photoLibrary){
+                window.photoLibrary = new PhotoLibrary()
+            }
+            window.photoLibrary.onSelect((url) => { console.log(url); })
+            window.photoLibrary.render()
+        </script>
+    </body>
+</html>

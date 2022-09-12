@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SheetParrot Console</title>
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+
+        <link rel="stylesheet" href="{{it.domain}}/css/console.css?version={{it.css_version}}">
+        
+
+        <script src="{{it.domain}}/js/vendor/chart.js"></script>
+
+        <script>const DOMAIN="{{it.domain}}"</script>
+    </head>
+    <body>
+        {{@includeFile(it.dir + "/views/console/_headerbar.squirrelly", it)/}}
+        <div class="app">
+            {{@includeFile(it.dir + "/views/console/_sidebar.squirrelly", it)/}}
+
+            <div class="main">
+                <div class="splash">
+                    <h1 class="title has-text-white">Server Status</h1>
+                </div>
+                <div class="window container is-fullhd">
+                    <div class="columns p-4">
+                        <div class="column">
+
+                            <div class="status-card">
+                                <div class="status-card-body">
+                                    <h1 class="">Used Memory ({{Math.round((it.memory_usage.heapTotal / it.memory_limit) * 100)}}%)</h1>
+                                    <h2 class=""><b>{{it.memory_usage.heapTotal}}</b></h2>
+                                    <div class="dashboard-progress" value="{{(it.memory_usage.heapTotal / it.memory_limit)}}" data-link="container_1">
+                                        <div class="circular_progressbar large" id="container_1"></div>
+                                        <i class="fas fa-memory fa-2x centerIcon"></i></div>
+                                    <p class="">Of Total Memory</p>
+                                    <h3 class="">{{it.memory_limit}}</h3>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="column">
+
+                            <div class="status-card">
+                                <div class="status-card-body">
+                                    <h1 class="">CPU Usage</h1>
+                                    <h2 class=""><b>{{it.cpu}}%</b></h2>
+                                    <div class="dashboard-progress" value="{{it.cpu / 100}}" data-link="container_2">
+                                        <div class="circular_progressbar large" id="container_2"></div>
+                                        <i class="fas fa-microchip fa-2x centerIcon"></i></div>
+                                    <p class="">Total</p>
+                                    <h3 class="">100%</h3>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="column">
+
+                            <div class="status-card">
+                                <div class="status-card-body">
+                                    <h1 class="">Active Sessions</h1>
+                                    <h2 class=""><b>{{it.count_sessions}}</b></h2>
+                                    <div class="dashboard-progress" value="{{it.count_sessions / 100}}" data-link="container_3">
+                                        <div class="circular_progressbar large" id="container_3"></div>
+                                        <i class="fas fa-user fa-2x centerIcon"></i></div>
+                                    <p class="">Limit</p>
+                                    <h3 class="">100</h3>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+        <script>
+            (function(){
+
+                function progressNow(container, progress){
+                    let progressBar = new ProgressBar.Circle(container, {
+                        strokeWidth: 3,
+                        easing: 'easeInOut',
+                        from: { color: '#07cdff' },
+                        to: { color: '#eb2428' },
+                        duration: 1600,
+                        step: function(state, circle) {
+                            circle.path.setAttribute('stroke', state.color);
+                        }
+                    });
+                    progressBar.animate(progress);
+
+                    container = $QS(container)
+
+                    container.addEventListener('click', () => {
+                        progressBar.set(0);
+                        progressBar.animate(progress)
+                    })
+                }
+
+                let containers = $QSA(".dashboard-progress")
+
+                containers.forEach(c => {
+                    let value = c.getAttribute('value'),
+                        container = c.getAttribute('data-link')
+
+                    progressNow('#' + container, value)
+                })
+
+            })()
+        </script>
+    </body>
+</html>

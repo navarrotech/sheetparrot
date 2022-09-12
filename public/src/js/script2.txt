@@ -1,0 +1,44 @@
+Do any of you guys also struggle with virtual homework?
+
+Hi r/Teachers! I need your help.
+
+**My backstory:**
+During the pandemic, I asked other teachers what they were doing for virtual homework. 
+
+Managing Zoom/Google Classroom/Blackboard was already difficult enough for all of them, but then how did they also manage the homework?
+
+One teacher told me that their workflow was to create a Microsoft Word document, they'd spend a while formatting it correctly, and then they would email it out to 300+ students. 
+
+They would then have to make sure that the 300+ students had access to Microsoft Office at home, made sure they could open it and everything worked, and then wait to get submissions back.
+
+They told me that they would usually get emailed back around 300+ word files every other night, and it would take them 3-4 hours to open each Word document individually, write emails with notes on their homework, and then enter their grades into the computers.
+
+Not to mention the sorting of different files, misnamed file names, and students that didn't put their names on papers or filenames.
+
+When I heard about this, I was shocked and thought: "There has to be a better way!"
+
+But everything I found was just file based.
+
+Blackboard and Canvas were extremely overcomplicated and worked best with Microsoft Word files.
+
+Google Drive wasn't an option, because sharing & permissions was too complex.
+
+Even Google Forms and other form websites weren't great solutions, because they were too basic or weren't designed to solve this specific problem.
+
+**Since then:**
+I heard that story one year ago, and decided to create a better solution.
+
+I put all hobbies and distractions aside, and I've spent the last year coding and developing a web app called SheetParrot that simplifies this problem.
+
+The idea is that it's all browser based. So no more downloads, Microsoft Office, or word files. A student could fill out the homework on their phone in a matter of minutes.
+
+The pricing is set to have a free plan, and a $15 per month plan.
+
+I tried my best to keep the cost as low as possible to help make it affordable for teachers.
+
+**My Ask:**
+It's been a long year just coding away and I haven't gotten feedback in a couple of months.
+
+I actually just finished developing the app a week ago, and I'm now looking for beta users to smooth out all the bugs.
+
+I would love to hear feedback about what you guys are doing today and if you guys think this is a good idea?

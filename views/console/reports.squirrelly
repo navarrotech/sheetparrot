@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SheetParrot Console | Reports</title>
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+
+        <link rel="stylesheet" href="{{it.domain}}/css/console.css?version={{it.css_version}}">
+        <script src="{{it.domain}}/js/vendor/chart.js"></script>
+        <script>const DOMAIN="{{it.domain}}";</script>
+
+    </head>
+    <body>
+        {{@includeFile(it.dir + "/views/console/_headerbar.squirrelly", it)/}}
+        <div class="app">
+            {{@includeFile(it.dir + "/views/console/_sidebar.squirrelly", it)/}}
+            <div class="main">
+                <div class="splash">
+                    <h1 class="title is-size-1 has-text-white has-text-centered mb-0 is-hidden-mobile">Admin Reports</h1>
+                </div>
+                <div class="window container is-fullhd is-bottom">
+                    <div class="columns">
+                        <div class="column">
+                            <div class="box">
+                                <p><b>Mainstream:</b></p>
+                                <table class="table is-fullwidth is-hoverable is-narrow is-striped">
+                                    <thead>
+                                      <tr>
+                                          <th>Path</th>
+                                          <th>Views</th>
+                                          <th>Uniques</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{@foreach(it.global.norm_visits) => page}}
+                                        <tr>
+                                            <th>{{page}}</th>
+                                            {{}}
+                                            <th>{{it.global.norm_visits[page].clicks}}</th>
+                                            <th>{{it.global.norm_visits[page].uniques}}</th>
+                                        </tr>
+                                        {{/foreach}}
+                                    </tbody>
+                                </table>
+                                <p><b>Unstandard:</b></p>
+                                <table class="table is-fullwidth is-hoverable is-narrow is-striped">
+                                    <thead>
+                                      <tr>
+                                          <th>Path</th>
+                                          <th>Views</th>
+                                          <th>Uniques</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody>
+                                        {{@foreach(it.global.misc_visits) => page}}
+                                        <tr>
+                                            <th>{{page}}</th>
+                                            <th>{{it.global.misc_visits[page].clicks}}</th>
+                                            <th>{{it.global.misc_visits[page].uniques}}</th>
+                                        </tr>
+                                        {{/foreach}}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            (function(){
+
+            })();
+        </script>
+    </body>
+</html>

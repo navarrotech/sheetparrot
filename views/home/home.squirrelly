@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta content="utf-8" http-equiv="encoding"> 
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>SheetParrot | Create Virtual Homework Online</title>
+
+        <!-- Metadata -->
+        <link rel="icon" type="image/png" href="{{it.domain}}/images/logo.svg">
+        <meta class="metaTagTop" name="description" content="">
+        <meta class="metaTagTop" name="keywords" content="sheetparrot,homework,sheets,online homework">
+        <meta class="metaTagTop" name="author" content="SheetParrot">
+        <meta class="metaTagTop" property="og:image" content="{{it.domain}}/images/logo.svg" id="social-image">
+        <meta property="og:title" content="SheetParrot">
+        <meta property="og:description" content="">
+        <meta property="og:url" content="{{it.domain}}">
+        <meta property="og:type" content="website">
+
+        <link rel="stylesheet" href="{{it.domain}}/css/SheetParrot.min.css?version={{it.css_version}}">
+        <script>
+            const _ENV = "{{it.ENV.NODE_ENV}}";
+            const _DOMAIN = "{{it.domain}}";
+            var AUTHORIZED = "{{it.authorized}}" == "true" ? true : false;
+            const _PLAN = "{{@if(it.authorized && it.user)}}{{it.user.preferences.billing.plan}}{{/if}}"
+            const _EMAIL = "{{@if(it.authorized)}}{{it.user.email}}{{#else}}anonymous{{/if}}";
+        </script>
+    </head>
+
+    <body>
+        {{@includeFile(it.dir + "/views/home/partials/_navbar.squirrelly", it)/}} 
+
+        <!-- Splash -->
+        <section class="section is-splash">
+
+            <div class="navspacer"></div>
+
+            <div class="background">
+                <div class="object"></div>
+            </div>
+
+            <div class="block container is-max-small">
+                <div class="has-text-centered pb-4 mb-4">
+                    <h1 class="superTitle has-text-white">"Create And Grade Virtual Homework For Your Students With Digital Online Homework!"</h1>
+                    <!--<h2 class="title is-size-3 has-text-white">We help you connect with your students </h2>-->
+                </div>
+            </div>
+
+            <div class="block container is-max-widescreen">
+                <div class="block columns">
+                    <div class="column is-three-fifths">
+                        <div class="videoContainer">
+                            <figure class="image is-16by9 is-rounded">
+                                <iframe class="has-ratio" data-src="https://player.vimeo.com/video/639330464?autoplay=true&background=true&loop=true" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" allow="autoplay"></iframe>
+                            </figure>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <h1 class="superTitle is-title-2">Worksheets in minutes!</h1>
+                        <hr class="break is-medium is-dark">
+                        <div class="block is-size-4 theIcons">
+                            <div class="field icon-text">
+                                <span class="pr-2 icon"><i class="far fa-lg fa-check-circle"></i></span><span>Create homework</span>
+                            </div>
+                            <div class="field icon-text">
+                                <span class="pr-2 icon"><i class="far fa-lg fa-check-circle"></i></span><span>Assign to your students</span>
+                            </div>
+                            <div class="field icon-text">
+                                <span class="pr-2 icon"><i class="far fa-lg fa-check-circle"></i></span><span>Automatically send email reminders</span>
+                            </div>
+                            <div class="field icon-text">
+                                <span class="pr-2 icon"><i class="far fa-lg fa-check-circle"></i></span><span>​Grade their work within minutes</span>
+                            </div>
+                            <div class="field icon-text">
+                                <span class="pr-2 icon"><i class="far fa-lg fa-check-circle"></i></span><span>​And much more...</span>
+                            </div>
+                        </div>
+                        <div class="block buttons are-large">
+                            <a class="button is-primary is-double" href="{{it.domain}}/signup" data-action="signup">
+                                <span>Create Your First Sheet For FREE!</span>
+                                <span><span class="is-hidden-tablet-only">No Credit Card Required - </span>Create Your Free Account Now!</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- How It Works -->
+        <section class="section is-howitworks">
+            
+            <div class="block container is-max-small">
+                <div class="has-text-centered">
+                    <h2 class="subtitle is-size-4 mb-0">Every sheet is built with an easy to use editor</h2>
+                    <h1 class="superTitle">Intuitive &amp; Easy To Create</h1>
+                </div>
+            </div>
+            <div class="block container is-fullhd">
+                <div class="columns is-vcentered">
+                    <div class="column">
+                        <figure class="image is-gif">
+                            <iframe class="has-ratio" data-src="https://player.vimeo.com/video/639604186?autoplay=true&background=true&loop=true" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" allow="autoplay"></iframe>
+                        </figure>
+                    </div>
+                    <div class="column">
+                        <!-- How It Works #1-->
+                        <div class="how">
+                            <div>
+                                <div class="icon-wrapper">
+                                    <span class="icon"><i class="far fa-lg fa-copy"></i></span>
+                                </div>
+                                <span class="howTitle">1. Create Your Assignment</span>
+                            </div>
+                            <p>Just click to add a question and customize every little detail. You can add text-questions, multi-choice, dropdowns, buttons, videos, and mutli answer questions.</p>
+                        </div>
+                        <!-- How It Works #2-->
+                        <div class="how">
+                            <div>
+                                <div class="icon-wrapper">
+                                    <span class="icon"><i class="far fa-lg fa-paper-plane"></i></span>
+                                </div>
+                                <span class="howTitle">2. Send to your students</span>
+                            </div>
+                            <p>
+                                Every sheet is very easy to share. Simply send the link to your students, and await thier answers!
+                            </p>
+                        </div>
+                        <!-- How It Works #3-->
+                        <div class="how">
+                            <div>
+                                <div class="icon-wrapper">
+                                    <span class="icon"><i class="fas fa-lg fa-pen-fancy"></i></span>
+                                </div>
+                                <span class="howTitle">3. Grade their work &amp; leave notes!</span>
+                            </div>
+                            <p>
+                                Grading is super fast and easy! Plus, you can set "correct answers" ahead of time, and you can have a lot of the grading done for you!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Asthetic -->
+        <div class="wavey">
+            <img src="{{it.domain}}/images/wavey.svg" alt="">
+        </div>
+
+        <!-- Who is it for -->
+        <section class="section is-whofor is-hidden">
+            <div class="container is-max-widescreen">
+                
+                <div class="columns">
+                    <div class="column">
+                        <div class="block">
+                            <h2 class="subtitle is-size-7">
+                                <b>No Credit Card Required</b>
+                                &nbsp;&bullet;&nbsp;Create Your First Sheet Now!
+                            </h2>
+                            <h1 class="title">SheetParrot Is Perfect For:</h1>
+                        </div>
+                        <div class="block is-size-2">
+                            <div class="icon-text mb-4"><span class="icon pr-4 has-text-primary"><i class="far fa-lg fa-check-circle"></i></span><span>Teachers</span></div>
+                            <div class="icon-text mb-4"><span class="icon pr-4 has-text-primary"><i class="far fa-lg fa-check-circle"></i></span><span>Schools</span></div>
+                            <div class="icon-text mb-4"><span class="icon pr-4 has-text-primary"><i class="far fa-lg fa-check-circle"></i></span><span>Colleges</span></div>
+                            <div class="icon-text mb-4"><span class="icon pr-4 has-text-primary"><i class="far fa-lg fa-check-circle"></i></span><span>Virtual Education</span></div>
+                            <div class="icon-text mb-4"><span class="icon pr-4 has-text-primary"><i class="far fa-lg fa-check-circle"></i></span><span>Course Creators</span></div>
+                            <div class="icon-text mb-4"><span class="icon pr-4 has-text-primary"><i class="far fa-lg fa-check-circle"></i></span><span>And many more!</span></div>
+                        </div>
+                        <div class="block mt-6 buttons are-large">
+                            <a class="button is-primary is-double" href="{{it.domain}}/signup" data-action="signup">
+                                <span>Create Your First Sheet For FREE!</span>
+                                <span>No Credit Card Required - Create Your Free Account Now!</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <!-- TODO: Insert Gif Here -->
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Why SheetParrot? -->
+        <section class="section is-why">
+
+            <div class="container is-fullhd">
+                <div class="block">
+                    <h1 class="superTitle has-text-centered">Why Is SheetParrot BETTER?</h1>
+                </div>
+                <!-- Reason #1 -->
+                <div class="block pt-8 pb-8 columns is-vcentered is-inverted-mobile">
+                    <div class="column is-two-fifths">
+                        <h1 class="superTitle is-title-2">Ever Tried Using A Word Doc Or PDF To Make Homework?</h1>
+                        <p>
+                            Before SheetParrot this was a terrible process for so many reasons. Creating the file, sending the files, making sure students have access to Microsoft Office, and getting emailed hundreds of submissions back sounds like the hardest way to collect homework.
+                        </p>
+                        <br>
+                        <p>
+                            We made creating and grading sheets so easy! Instead of downloading anything (like Microsoft Office), SheetParrot hosts all of the homework online so <b>it's super accessible</b> and your students can easily view and submit their work.
+                        </p>
+                        <br>
+                        <p>
+                            Instead of struggling with technology issues and so many copies of files, <b>everything is neatly organized and easy to view.</b> Graded homework is synced with your students and they can view everything easily from their dashboard.
+                        </p>
+                    </div>
+                    <div class="column">
+                        <figure class="image is-gif">
+                            <iframe class="has-ratio" data-src="https://player.vimeo.com/video/639604327?autoplay=true&background=true&loop=true" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" allow="autoplay"></iframe>
+                        </figure>
+                    </div>
+                </div>
+                <!-- Reason #2 -->
+                <div class="block pt-8 pb-8 columns is-vcentered">
+                    <div class="column">
+                        <figure class="image is-gif">
+                            <iframe class="has-ratio" data-src="https://player.vimeo.com/video/639604470?autoplay=true&background=true&loop=true" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" allow="autoplay"></iframe>
+                        </figure>
+                    </div>
+                    <div class="column is-two-fifths">
+                        <h1 class="superTitle is-title-2">Paper is not the future.</h1>
+                        <p class="has-text-weight-bold">FACT: Students using SheetParrot get homework turned in more than standard paper or word documents would get turned in.</p>
+                        <br>
+                        <p>
+                            Kids are using their phones and computers more every day. Homework gets set aside, left behind, and forgotten. Using SheetParrot, <b>they can no longer say "my dog ate it"</b> AND get reminded regularly.
+                        </p>
+                        <br>
+                        <p>
+                            You can set deadlines and assign them homework onto your sheets! We will remind your students via email for you and help them to get more done!
+                        </p>
+                        <br>
+                        <p>
+                            <b>We set out to make homework fun again!</b> SheetParrot is designed to be colorful, fun, and easy for them! Connect to your students and make it better for them too.
+                        </p>
+                    </div>
+                </div>
+                <!-- Reason #3 -->
+                <div class="block pt-8 pb-8 columns is-vcentered is-inverted-mobile">
+                    <div class="column is-two-fifths">
+                        <h1 class="superTitle is-title-2">Creating &amp; grading is <u>so</u> much easier!</h1>
+                        <p>
+                            Traditionally creating homework can be a tedious process. You have to design the homework, print the homework, and hand it out to all of your students one by one.
+                        </p>
+                        <br>
+                        <p>
+                            We asked: <b>"What if you could share homework with a single link?"</b> Wouldn't it be nice if everything was synced, easy to access, and added to your student's accounts easily? Well that's what we do!
+                        </p>
+                        <br>
+                        <p>
+                            Imagine being able to grade their work without having to wait the next day for them to hand in the paper.
+                        </p>
+                        <br>
+                        <p>
+                            <b>Grading is a matter of simple clicking</b> now, leaving notes is a simple process, and you can see their answers fast.
+                        </p>
+                    </div>
+                    <div class="column">
+                        <figure class="image is-gif">
+                            <iframe class="has-ratio" data-src="https://player.vimeo.com/video/639604440?autoplay=true&background=true&loop=true" frameborder="0" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" allow="autoplay"></iframe>
+                        </figure>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Get The Demo 
+        <section class="section is-demo p-0 mt-8 topSpacing">
+            <div class="hero is-primary">
+                <div class="hero-body">
+                    <div class="has-text-centered">
+                        <h1 class="title">Create A Sheet Now</h1>
+                        <h2 class="subtitle">Let us prove to you how amazing this is!</h2>
+                        <div class="buttons is-centered are-large">
+                            <a class="button is-white" href="{{it.domain}}/create">Try creating homework for yourself now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>-->
+
+        <!-- Instead of demo, this will suffice for now -->
+        <section class="section is-demo p-0 mt-8 topSpacing">
+            <div class="hero is-primary">
+                <div class="hero-body">
+                    <div class="has-text-centered">
+                        <h1 class="title">Try it now for FREE!</h1>
+                        <h2 class="subtitle">Let us prove to you how amazing this is!</h2>
+                        <div class="buttons is-centered are-large">
+                            <a class="button is-white is-double is-normal" href="{{it.domain}}/signup" data-action="signup">
+                                <span>Create Your First Sheet For FREE!</span>
+                                <span>No Credit Card Required - Create Your Free Account Now!</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="section is-features">
+            <div class="container is-max-widescreen">
+                <div class="block">
+                    <h1 class="superTitle has-text-centered">Features</h1>
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        <!-- Feature: Sheets -->
+                        <div class="feature">
+                            <figure class="image is-96x96 is-feature mb-4">
+                                <img src="{{it.domain}}/images/icons/sheet.svg" alt/>
+                            </figure>
+                            <h1 class="title is-size-4">Create Homework Easily</h1>
+                            <p class="subtitle is-size-6">No more pdfs or complex tech-- Try our intuitive and easy to use editor.</p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <!-- Feature: Grader -->
+                        <div class="feature">
+                            <figure class="image is-96x96 is-feature mb-4">
+                                <img src="{{it.domain}}/images/icons/grading.svg" alt/>
+                            </figure>
+                            <h1 class="title is-size-4">Powerful grading system</h1>
+                            <p class="subtitle is-size-6">View all of your students submissions in one place, and grade with minimal clicks.</p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <!-- Feature: Classrooms -->
+                        <div class="feature">
+                            <figure class="image is-96x96 is-feature mb-4">
+                                <img src="{{it.domain}}/images/icons/school.svg" alt/>
+                            </figure>
+                            <h1 class="title is-size-4">Create classrooms</h1>
+                            <p class="subtitle is-size-6">Manage all of your students in one place, link their accounts to you, and assign sheets directly to their accounts.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        <!-- Feature: Correct Answers -->
+                        <div class="feature">
+                            <figure class="image is-96x96 is-feature mb-4">
+                                <img src="{{it.domain}}/images/icons/correct.svg" alt/>
+                            </figure>
+                            <h1 class="title is-size-4">Set "correct answers"</h1>
+                            <p class="subtitle is-size-6">When a student submits their work, if their answer matches the correct answer, it'll automatically be marked correct.</p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <!-- Feature: Due Dates -->
+                        <div class="feature">
+                            <figure class="image is-96x96 is-feature mb-4">
+                                <img src="{{it.domain}}/images/icons/calendar.svg" alt/>
+                            </figure>
+                            <h1 class="title is-size-4">Set due dates</h1>
+                            <p class="subtitle is-size-6">Set priorities in your student's schedules. Make it so your students cannot submit their work after the due date.</p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <!-- Feature: Email Reminders -->
+                        <div class="feature">
+                            <figure class="image is-96x96 is-feature mb-4">
+                                <img src="{{it.domain}}/images/icons/mail.svg" alt/>
+                            </figure>
+                            <h1 class="title is-size-4">Email reminders</h1>
+                            <p class="subtitle is-size-6">We'll notify them when you assign them new work, and if you set a due date we'll remind to finish before the sheet's due date passes.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="columns">
+                    <div class="column">
+                        <!-- Feature:  -->
+                        <div class="feature">
+                            <figure class="image is-96x96 is-feature mb-4">
+                                <img src="{{it.domain}}/images/icons/lock.svg" alt/>
+                            </figure>
+                            <h1 class="title is-size-4">Security control</h1>
+                            <p class="subtitle is-size-6">You can set passwords on your sheets, make them only available to your students, and have full control over who can see them.</p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <!-- Feature:  -->
+                        <div class="feature">
+                            <figure class="image is-96x96 is-feature mb-4">
+                                <img src="{{it.domain}}/images/icons/export.svg" alt/>
+                            </figure>
+                            <h1 class="title is-size-4">Export grades to CSV</h1>
+                            <p class="subtitle is-size-6">This makes it super easy to import your student's grades into PowerSchool or to superiors for reports.</p>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <!-- Feature:  -->
+                        <div class="feature">
+                            <figure class="image is-96x96 is-feature mb-4">
+                                <img src="{{it.domain}}/images/icons/palette.svg" alt/>
+                            </figure>
+                            <h1 class="title is-size-4">Use your own brand and colors</h1>
+                            <p class="subtitle is-size-6">You can use your school's logo and branding to really bring SheetParrot to life!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Goodbye And Hello Banner -->
+        <section class="section p-0">
+            <div class="hero is-colorful is-medium">
+                <div class="hero-body">
+
+                    <div class="container is-fullhd" id="goodbye-hello">
+                        <h1 class="is-uppercase">
+                            <span>Say goodbye <b>to Word Docs</b></span>
+                            <span class="goodbye-text">Goodbye <b>to pdfs</b></span>
+                            <span class="goodbye-text">Goodbye <b>to downloads</b></span>
+                            <span class="goodbye-text">Goodbye <b>to file management</b></span>
+                            <span class="goodbye-text">Goodbye <b>to late night grading</b></span>
+                            <span class="goodbye-text">Goodbye <b>to paper</b></span>
+                        </h1>
+                        <h1 class="is-uppercase has-text-right">
+                            <span>And <b class="is-italic">hello</b> to SheetParrot</span>
+                        </h1>
+                    </div>
+                </div>
+
+            </div>
+            <div class="container is-max-small">
+                <div class="box is-letter">
+                    <div class="block content pt-4 pb-4">
+                        <h1 class="title has-text-centered">The future of education online</h1>
+                        <p>
+                            Dear friend,
+                        </p>
+                        <p>
+                            I started SheetParrot with a vision to make homework fun, colorful, and easy to use. As we developed SheetParrot I found a community full of passionate teachers and love. 
+                        </p>
+                        <p>
+                            I quickly realized that together we are making so much more than a software, we are actually making teachers excited to create homework again!
+                        </p>
+                        <p>
+                            I truly believe that SheetParrot is helping to be a part of something bigger: The future of education online.
+                        </p>
+                        <p>
+                            It's vital to get this made to the best of our ability, so that the future of education can be done right.
+                        </p>
+                        <p>
+                            I'd like to invite you to get started, and join the paper-free future.
+                        </p>
+                        <figure class="image m-0" style="max-width:180px;">
+                            <img src="{{it.domain}}/images/navarro_signature.png" alt="Alex Navarro"/>
+                        </figure>
+                        <p>
+                            <b>Founder of SheetParrot</b>
+                        </p>
+                    </div>
+                </div>
+                <div class="block buttons is-centered">
+                    <a class="button is-primary is-double is-normal" href="{{it.domain}}/signup" data-action="signup">
+                        <span>Create Your First Sheet For FREE!</span>
+                        <span>No Credit Card Required - Create Your Free Account Now!</span>
+                    </a>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- Pricing -->
+        <section class="section is-pricing">
+            {{@includeFile(it.dir + "/views/partials/_pricing.squirrelly", it)/}}
+        </section>
+
+        <!-- Final Call To Action -->
+        <section class="section is-final-banner p-0">
+            <div class="hero is-primary is-medium">
+                <div class="hero-body">
+                    
+                    <div class="container is-max-widescreen">
+                        <div class="block has-text-centered">
+                            <h1 class="superTitle has-text-white">Together, we can make education better.</h1>
+                            <h1 class="title is-size-3">No Credit Card Required&nbsp;&bullet;&nbsp;Get Started For FREE Right Now!</h1>
+                        </div>
+                        <div class="block buttons is-centered">
+                            <a class="button is-light is-double is-normal" href="{{it.domain}}/signup" data-action="signup">
+                                <span>Create Your First Sheet For FREE!</span>
+                                <span>No Credit Card Required - Create Your Free Account Now!</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        {{@includeFile(it.dir + "/views/home/partials/_footer.squirrelly", it)/}}
+
+        <footer>
+            {{@includeFile(it.dir + "/views/partials/_global_foot.squirrelly", it)/}}
+
+            <script>let p = new Pricing("NONE");</script>
+
+            <!-- Google Analytics -->
+            <script async src="https://www.googletagmanager.com/gtag/js?id=UA-213698949-1"></script>
+            <script>
+                window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'UA-213698949-1');
+            </script>
+
+            <!-- Mouseflow -->
+            <script type="text/javascript">
+                setTimeout(() => {
+                    window._mfq = window._mfq || [];
+                    (function() {
+                        var mf = document.createElement("script");
+                        mf.type = "text/javascript"; mf.defer = true;
+                        mf.src = "https://cdn.mouseflow.com/projects/c0be60ab-6b66-437b-b660-cb5df4efcb82.js";
+                        document.getElementsByTagName("head")[0].appendChild(mf);
+                    })();
+                    }, 5000)
+            </script>
+
+            <!-- Facebook Pixel -->
+            <script>
+                !function(f,b,e,v,n,t,s)
+                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                n.queue=[];t=b.createElement(e);t.async=!0;
+                t.src=v;s=b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t,s)}(window, document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+                fbq('init', '4460361337418599');
+                fbq('track', 'PageView');
+            </script>
+            <noscript>
+                <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=4460361337418599&ev=PageView&noscript=1"
+            /></noscript>
+            
+            {{@if(it.authorized)}}
+            <script>
+                /* <!-- Authenticated Freshchat Session --> */
+                function initFreshChat() {
+                    window.fcWidget.init({
+                        token: "26706b0c-94f6-461f-8670-fcb59e53f37d",
+                        host: "https://wchat.freshchat.com",
+                        firstName: "{{it.user.first_name}}",
+                        lastName: "{{it.user.last_name}}",
+                        email: "{{it.user.email}}",
+                        plan: "{{it.user.preferences.billing.plan}}"
+                    });
+                }
+                setTimeout(() => { function initialize(i,t){var e;i.getElementById(t)?initFreshChat():((e=i.createElement("script")).id=t,e.async=!0,e.src="https://wchat.freshchat.com/js/widget.js",e.onload=initFreshChat,i.head.appendChild(e))}function initiateCall(){initialize(document,"Freshdesk Messaging-js-sdk")}window.addEventListener?window.addEventListener("load",initiateCall,!1):window.attachEvent("load",initiateCall,!1); })
+            </script>
+            {{#else}}
+            <script>
+                /* <!-- Unauthenticated Freshchat Session --> */
+                function initFreshChat() {
+                    window.fcWidget.init({
+                        token: "26706b0c-94f6-461f-8670-fcb59e53f37d",
+                        host: "https://wchat.freshchat.com",
+                    });
+                }
+                console.warn("Freshchat: Anonymous session mode")
+                setTimeout(() => { function initialize(i,t){var e;i.getElementById(t)?initFreshChat():((e=i.createElement("script")).id=t,e.async=!0,e.src="https://wchat.freshchat.com/js/widget.js",e.onload=initFreshChat,i.head.appendChild(e))}function initiateCall(){initialize(document,"Freshdesk Messaging-js-sdk")}window.addEventListener?window.addEventListener("load",initiateCall,!1):window.attachEvent("load",initiateCall,!1); })
+            </script>
+            {{/if}}
+
+            <!-- Fonts: Cabin, Montserrat, Poppins, Quicksand, PT Mono and Roboto-->
+            <link rel="preconnect" href="https://fonts.googleapis.com">
+            <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+            <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Quicksand:wght@300;400;500;600;700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=PT+Mono&display=swap" rel="stylesheet">
+            <script>establishReferrer();</script>
+            <script>cookieBanner();</script>
+
+            <script>
+                let iframes = document.querySelectorAll('iframe')
+                iframes.forEach(frame => {
+                    let src = frame.getAttribute('data-src')
+                    frame.removeAttribute('data-src')
+                    if(localStorage && localStorage.getItem('cookie_analytics_disabled') == 'true'){ src += '&dnt=true' }
+                    frame.setAttribute('src', src)
+                })
+            </script>
+        </footer>
+
+    </body>
+</html>

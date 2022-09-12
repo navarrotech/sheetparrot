@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+    <head>
+        <title>SheetParrot | Thank you!</title>
+        {{@includeFile(it.dir + "/views/partials/_tracking_header.squirrelly", it)/}}
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+        
+        <style>
+            .card_type{
+                display:flex;
+                align-items: center;
+            }
+            .card_type .image{
+                margin-right:10px;
+                max-width:80px;
+            }
+            .payment_method{
+                border:1px solid rgba(0,0,0,0.1);
+                border-radius:8px;
+                padding:1.5em 2em;
+            }
+            .innerBox{
+                padding:1em 2.5em;
+            }
+            .plan{
+                display:flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .plan .image{ max-width:130px; margin-right:25px; }
+            .box.is-summary{
+                box-shadow:none;
+                background:#f0f2f5;
+            }
+            .box.is-summary hr{
+                background-color: #dcdbe4;
+            }
+            .box.is-summary .twobox:last-child *{
+                font-weight:bold;
+            }
+            .cc-icon{
+                transform:translateY(1px);
+            }
+            .box{
+                color:black;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="view">
+            
+            <div class="app_view">
+                {{@includeFile(it.dir + "/views/partials/_header.squirrelly", it)/}}
+                <div class="app_content">
+
+                    {{@if(it.last_invoice && it.subscription)}}
+                    <div class="container is-max-widescreen mt-4 is-bottom">
+                        <h1 class="title is-size-1 has-text-centered">
+                            Thank you for joining SheetParrot!
+                        </h1>
+                        <div class="columns">
+                            <div class="column is-8 is-offset-2">
+                                <div class="box">
+                                    <div class="billing-splash">
+                                        <div class="billing-logo-holder shadow20">
+                                            <figure class="image is-96x96">
+                                                <img src="{{it.domain}}/images/logo.svg"/>
+                                            </figure>
+                                        </div>
+                                    </div>
+                                    <div class="box billing-titles">
+                                        <h1 class="title is-size-2 has-text-centered">Receipt from SheetParrot LLC</h1>
+                                        <p class="subtitle is-size-5 has-text-centered">Billed to - {{it.last_invoice.customer_email}}</p>
+                                    </div>
+                                    <div class="columns p-4 mt-3 has-text-centered">
+                                        <div class="column">
+                                            <p class="title is-size-6 has-text-grey-dark">AMOUNT PAID</p>
+                                            <p class="subtitle is-size-6 has-text-black">{{@formatStripeNumber(it.last_invoice.amount_paid)/}}</p>
+                                        </div>
+                                        <div class="column">
+                                            <p class="title is-size-6 has-text-grey-dark">DATE PAID</p>
+                                            <p class="subtitle is-size-6 has-text-black">{{new Date(it.last_invoice.created * 1000).toDateString()}}</p>
+                                        </div>
+                                        <div class="column">
+                                            <p class="title is-size-6 has-text-grey-dark">PAYMENT METHOD</p>
+                                            <p class="subtitle is-size-6 has-text-black is-capitalized">
+                                                <span>{{it.paymentMethod.card.brand}} - {{it.paymentMethod.card.last4}}&nbsp;</span>
+                                                <span class="icon"><img class="cc-icon" src="{{it.domain}}/images/cc/{{@planToCC(it.paymentMethod.card.brand)/}}.svg"/></span>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="box is-summary mt-4">
+                                        {{@each(it.last_invoice.lines.data) => line_item}}
+                                        <div class="twobox">
+                                            <p class="is-size-6">{{line_item.description}}</p>
+                                            <p class="is-size-6">{{@formatStripeNumber(line_item.amount)/}}</p>
+                                        </div>
+                                        {{/each}}
+                                        {{@if(String(it.last_invoice.amount_paid) != String(it.last_invoice.total))}}
+                                        <div class="twobox mt-3">
+                                            <p class="is-size-6">Applied balance:</p>
+                                            <p class="is-size-6">{{@formatStripeNumber( (it.last_invoice.amount_paid - it.last_invoice.total) )/}}</p>
+                                        </div>
+                                        {{/if}}
+                                        <hr>
+                                        <div class="twobox">
+                                            <p class="is-size-6">Amount due:</p>
+                                            <p class="is-size-6">{{@formatStripeNumber(it.last_invoice.amount_due)/}}</p>
+                                        </div>
+                                        <div class="twobox mt-3">
+                                            <p class="is-size-6">Amount charged:</p>
+                                            <p class="is-size-6">{{@formatStripeNumber(it.last_invoice.amount_paid)/}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="buttons is-centered">
+                                        <a class="button is-primary" href="{{it.domain}}/billing">
+                                            <span class="icon">
+                                                <i class="fas fa-arrow-left"></i>
+                                            </span>
+                                            <span>Back to dashboard</span>
+                                        </a>
+                                    </div>
+                                    <hr>
+                                    <p class="is-size-6 has-text-centered mb-4">
+                                        {{@if(it.last_invoice.hosted_invoice_url)}}
+                                        <a href="{{it.last_invoice.hosted_invoice_url}}" target="_blank">View receipt</a>{{/if}}
+                                        {{@if(it.last_invoice.invoice_pdf)}}&nbsp;|&nbsp;
+                                        <a href="{{it.last_invoice.invoice_pdf}}">Download PDF</a>{{/if}}
+                                    </p>
+                                    <p class="is-size-7 has-text-grey has-text-centered">If you have any questions, visit our <a href="{{it.domain}}/support">support page</a> or contact us at <a href="mailto:support@sheetparrot.com">support@sheetparrot.com</a>.</p>
+                                </div>
+                            </div>
+
+                            <div class="column is-hidden">
+                                <div class="box">
+                                    <div class="p-4">
+
+                                        <h1 class="title is-size-3 has-text-centered is-capitalized">The {{it.plan.name}} plan</h1>
+                                        <h2 class="subtitle is-size-6 has-text-centered has-text-grey">Your new plan details:</h2>
+
+                                        <div class="twobox mb-2">
+                                            <p class="is-size-6">Sheet limit:</p>
+                                            {{@if(it.plan.sheets === "Unlimited")}}
+                                            <p class="is-size-6"><b>{{it.plan.sheets}}</b></p>
+                                            {{#else}}
+                                            <p class="is-size-6">{{it.plan.sheets}}</p>
+                                            {{/if}}
+                                        </div>
+                                        <div class="twobox mb-2">
+                                            <p class="is-size-6">Submission limit:</p>
+                                            {{@if(it.plan.submissions === "Unlimited")}}
+                                            <p class="is-size-6"><b>{{it.plan.submissions}}</b></p>
+                                            {{#else}}
+                                            <p class="is-size-6">{{it.plan.submissions}}</p>
+                                            {{/if}}
+                                        </div>
+                                        <div class="twobox mb-2">
+                                            <p class="is-size-6">Classroom limit:</p>
+                                            {{@if(it.plan.classrooms === "Unlimited")}}
+                                            <p class="is-size-6"><b>{{it.plan.classrooms}}</b></p>
+                                            {{#else}}
+                                            <p class="is-size-6">{{it.plan.classrooms}}</p>
+                                            {{/if}}
+                                        </div>
+
+                                        <hr>
+
+                                        <div class="twobox mb-2">
+                                            <p class="is-size-6">Reporting:</p>
+                                            <p class="is-size-6">{{it.plan.reporting}}</p>
+                                        </div>
+                                        <div class="twobox mb-2">
+                                            <p class="is-size-6">Support:</p>
+                                            <p class="is-size-6">{{it.plan.support}}</p>
+                                        </div>
+
+                                        <hr>
+                                        {{@if(it.plan.classrooms === "Unlimited")}}
+
+                                        <!--<div class="twobox mb-2">
+                                            <p class="is-size-6"></p>
+                                            <p class="is-size-6">Extra Security Control</p>
+                                        </div>-->
+                                        <p class="is-size-6 has-text-centered"><b>Custom branding available</b></p>
+
+                                        <hr>
+                                        {{/if}}
+
+                                        <div class="twobox">
+                                            <p class="is-size-6 has-text-centered"><b>Plan renews:</b></p>
+                                            <p class="is-size-6 has-text-centered"><b>{{new Date(it.subscription.current_period_end * 1000).toDateString()}}</b></p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                    </div>
+                    {{#else}}
+                    <section class="hero is-halfheight">
+                        <div class="hero-body">
+                            <div class="container has-text-centered is-bottom">
+                                <h1 class="title is-size-2 has-text-centered">This page doesn't exist or has expired.</h1>
+                                <p class="subtitle is-size-5 has-text-centered">If you believe this is a mistake, <a href="{{it.domain}}/support">contact our support team</a> and let us know.</p>
+                                <div class="buttons is-centered">
+                                    <a class="button is-primary" href="{{it.domain}}/dashboard">
+                                        <span class="icon"><i class="fas fa-arrow-left"></i></span>
+                                        <span>Back to dashboard</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        </section>
+                    {{/if}}
+
+                </div>
+
+            </div>
+            
+        </div>
+    </body>
+</html>

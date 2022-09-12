@@ -1,0 +1,74 @@
+<nav class="navbar header shadow20" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+        <!-- Mobile Logo -->
+        <div class="navbar-start">
+            <a class="image is-48x48 mt-1" href="{{it.domain}}/dashboard">
+                <img src="{{it.domain}}/images/logo.svg"/>
+            </a>
+        </div>
+    </div>
+    <div class="navbar-menu is-hidden-mobile">
+        <div class="navbar-end">
+
+            <div class="navbar-item"> 
+                
+                <div class="dropdown is-right is-hidden-mobile">
+                    <div class="dropdown-trigger">
+                        <div class="image is-48x48 is-clickable">
+                            <img class="is-rounded" src="{{it.user.profile_picture}}">
+                        </div>
+                    </div>
+                    <div class="dropdown-menu" role="menu">
+                        <div class="dropdown-content">
+                            <div class="dropdown-item">
+                                <h1 class="title is-size-6">{{it.user.name}}</h1>
+                                <p class="subtitle is-size-7">{{it.user.email}}</p>
+                            </div>
+                            <hr class="dropdown-divider">
+                            <a href="{{it.domain}}/settings" class="dropdown-item">Settings</a>
+                            <a href="{{it.domain}}/dashboard" class="dropdown-item">Dashboard</a>
+                            <hr class="dropdown-divider">
+                            <a href="{{it.domain}}/logout" class="dropdown-item">Logout</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <a role="button" class="navbar-burger is-hidden-tablet" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+</nav>
+
+<div class="hamburger-menu"  role="menu">
+    <aside class="menu">
+        <ul class="menu-list">
+            <div class="field is-grouped is-centered">
+                <div class="image is-64x64">
+                    <img class="is-rounded" src="{{it.user.profile_picture}}">
+                </div>
+                <div class="ml-4 mt-2">
+                    <h1 class="title is-size-4 wsnw" style="max-width:180px;">{{it.user.name}}</h1>
+                    <p class="subtitle is-size-5 wsnw" style="max-width:180px;">{{it.user.email}}</p>
+                </div>
+            </div>
+            <div style="height:10px;"></div>
+            <p class="menu-label">Console Dashboard</p>
+            <a {{@if(it.requesting_page == '/console')}}class="is-active"{{/if}} href="{{it.domain}}/console">Dashboard</a>
+            <a {{@if(it.requesting_page.startsWith('/console/users'))}}class="is-active"{{/if}} href="{{it.domain}}/console/users">Users</a>
+            <a {{@if(it.requesting_page.startsWith('/console/sheets'))}}class="is-active"{{/if}} href="{{it.domain}}/console/sheets">Sheets</a>
+            <a {{@if(it.requesting_page.startsWith('/console/reports'))}}class="is-active"{{/if}} href="{{it.domain}}/console/reports">Reports</a>
+            <a {{@if(it.requesting_page.startsWith('/console/tools'))}}class="is-active"{{/if}} href="{{it.domain}}/console/tools">Tools</a>
+            <a {{@if(it.requesting_page.startsWith('/console/server'))}}class="is-active"{{/if}} href="{{it.domain}}/console/server">Server</a>
+            <p class="menu-label">Sheetparrot App</p>
+            <a href="{{it.domain}}/dashboard">Dashboard</a>
+            <a href="{{it.domain}}/logout">Logout</a>
+        </ul>
+    </aside>
+    <!--<div class="dropdown-content">
+        
+    </div>-->
+</div>

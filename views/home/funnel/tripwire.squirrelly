@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+
+        <title>$7 Offer</title>
+        {{@includeFile(it.dir + "/views/partials/_globalHeader.squirrelly", it)/}}
+        
+        <!-- Page-specific metadata -->
+        <meta property="og:title" content="SheetParrot">
+        <meta property="og:description" content="">
+        <meta class="metaTagTop" name="description" content="">
+        <meta class="metaTagTop" property="og:image" content="{{it.domain}}/images/logo.svg">
+        <meta property="og:title" content="SheetParrot">
+        <meta property="og:description" content="">
+        <meta property="og:url" content="{{it.requesting_url}}">
+        <meta property="og:type" content="website">
+
+    </head>
+
+    <body>
+
+        <section class="hero is-large is-primary">
+            <div class="hero-body has-text-centered">
+                <p class="title">In Progress</p>
+                <p class="subtitle">This area is still under development</p>
+            </div>
+        </section>
+
+        {{@includeFile(it.dir + "/views/partials/_global_foot.squirrelly", it)/}}
+    </body>
+</html>

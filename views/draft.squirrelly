@@ -1,0 +1,40 @@
+<!doctype html>
+<html>
+
+    <head>
+        <title>Draft</title>
+        {{@includeFile(it.dir + "/views/partials/_tracking_header.squirrelly", it)/}}
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+    </head>
+
+    <body>
+        <section class="section">
+            <div class="hero is-halfheight">
+                <div class="hero-body">
+                    <div class="file is-normal is-boxed has-name">
+                        <label class="file-label">
+                            <input class="file-input" type="file" name="resume">
+                            <span class="file-cta">
+                                <figure class="image is-64x64 is-centered">
+                                    <img src="{{it.domain}}/images/logo.svg"/>
+                                </figure>
+                            </span>
+                            <a class="button is-primary" style="border-radius:0 0 4px 4px;">
+                                <span class="file-icon">
+                                    <i class="fas fa-upload"></i>
+                                </span>
+                                <span class="file-label">
+                                    Select a new image
+                                </span>
+                            </a>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <footer>
+            {{@includeFile(it.dir + "/views/partials/_global_foot.squirrelly", it)/}}
+        </footer>
+    </body>
+
+</html>

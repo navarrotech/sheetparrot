@@ -1,0 +1,225 @@
+<!doctype html>
+<html>
+    <head>
+        <title>SheetParrot | Grader</title>
+        {{@includeFile(it.dir + "/views/partials/_tracking_header.squirrelly", it)/}}
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+        
+        <link rel="stylesheet" href="{{it.domain}}/css/grader.css?version={{it.css_version}}">
+        <script>const SHEETID = "{{it.sheetID}}"</script>
+        <script src="{{it.domain}}/js/grader.js"></script>
+    </head>
+    <body>
+
+        <div class="modal" id="byStudent_menu">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <div class="modal-card-title">
+                        <div class="nameBadge" style="justify-content:flex-start;">
+                            <figure class="image is-48x48 is-rounded mr-2"><img src="https://www.sheetparrot.com/images/account.svg"></figure>
+                            <div class="titles">
+                                <h1 class="title is-size-5 name wsnw"></h1>
+                                <h2 class="subtitle is-size-7 email wsnw"></h2>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="delete" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body pt-0">
+
+                    <div class="block">
+                        <div class="box">
+                            <div class="twobox mb-1">
+                                <p>Time First Opened:</p>
+                                <p id="details_started"></p>
+                            </div>
+                            <div class="twobox mb-1">
+                                <p>Submitted Time:</p>
+                                <p id="details_submitted"></p>
+                            </div>
+                            <div class="twobox mb-1">
+                                <p><b>Total time student spent:</b></p>
+                                <p id="details_total"></p>
+                            </div>
+
+                            <hr>
+
+                            <div class="twobox mb-1">
+                                <p>Correct Answers:</p>
+                                <p id="details_correct"></p>
+                            </div>
+                            <div class="twobox mb-1">
+                                <p>Incorrect Answers:</p>
+                                <p id="details_incorrect"></p>
+                            </div>
+                            <div class="twobox mb-1">
+                                <p>Total Questions:</p>
+                                <p id="details_questions"></p>
+                            </div>
+                            
+                            <hr>
+
+                            <div class="twobox mb-1">
+                                <p><b>Final Grade:</b></p>
+                                <p id="details_final"><b></b></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="block">
+                        <p class="is-size-5 mb-2">Grading Progress:</p>
+                        <div class="multi-progress">
+                            <div class="chunk is-blank" style="width:0%;"></div>
+                            <div class="chunk is-danger" style="width:0%;"></div>
+                            <div class="chunk is-success" style="width:0%;"></div>
+                        </div>
+                        <p class="is-size-7 has-text-right" style="opacity:0.8;">You have graded <span id="details_graded_inline"></span> answers of <span id="details_total_inline"></span> total questions</p>
+                    </div>
+
+                    <div class="block">
+                        <p class="is-size-5 mb-2">Actions:</p>
+                        <div class="buttons">
+                            <a class="button is-danger" action-label="delete"><span class="icon"><i class="fas fa-trash"></i></span><span>Delete Submission</span></a>
+                            <a class="button is-link" action-label="reset"><span class="icon"><i class="fas fa-sync"></i></span><span>Reset Submission</span></a>
+                        </div>
+                    </div>
+
+                    <!--<div class="block">
+                        <h1 class="title is-size-4">Grading Method:</h1>
+                        <div class="twobox">
+                            <div class="superButton byQuestion">
+                                <div class="icon is-large mb-3">
+                                    <i class="fas fa-3x fa-swatchbook"></i>
+                                </div>
+                                <p>Grade by question</p>
+                            </div>
+                            <div class="superButton bySubmission">
+                                <div class="icon is-large mb-3">
+                                    <i class="fas fa-3x fa-book"></i>    
+                                </div>
+                                <p>Grade by submission</p>
+                            </div>
+                        </div>
+                    </div>-->
+
+                </section>
+                <footer class="modal-card-foot buttons is-right">
+                    <button class="button" aria-label="close">Close</button>
+                </footer>
+            </div>
+            <script>initModal('byStudent_menu')</script>
+        </div>
+
+        <!-- Add A Note Modal -->
+        <div class="modal" id="addNoteModal">
+            <div class="modal-background"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <div class="modal-card-title ">
+                        <p class="title is-size-4">Add A Note</p>
+                        <p class="subtitle is-size-6">This feedback will be passed onto your student.</p>
+                    </div>
+                    <button class="delete" aria-label="close"></button>
+                </header>
+                <section class="modal-card-body">
+                    <textarea class="textarea" rows="7" id="note_feedback" maxlength="500"></textarea>
+                </section>
+                <footer class="modal-card-foot">
+                    <button class="button is-success">Add Note</button>
+                    <button class="button" aria-label="close">Cancel</button>
+                </footer>
+                <script>initModal('addNoteModal')</script>
+            </div>
+        </div>
+
+
+        <div class="view">
+
+            <!-- Header -->
+            <div class="header_toolbar p-3 shadow20">
+                <div class="columns is-vcentered">
+                    <div class="column is-2">
+                        <div class="buttons  mb-0">
+                            <a class="button is-light is-outlined mb-0 exit" href="{{it.domain}}/sheets/view/{{it.sheetID}}">
+                                <span class="icon is-flipped"><i class="fas fa-sign-out-alt"></i></span>
+                                <span>Exit Grader</span>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="column pt-2 pb-2">
+                        <div class="twobox">
+                            <div>
+                                <div class="nameBadge centered">
+                                    <figure class="image is-48x48 is-rounded mr-2"><img/></figure>
+                                    <div class="titles">
+                                        <h1 class="title is-size-5 name wsnw has-text-white"></h1>
+                                        <h2 class="subtitle is-size-7 email wsnw has-text-white"></h2>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="is-size-7 has-text-centered mb-0 has-text-white has-text-right grade_helper">Current Grade:</p>
+                                <h1 class="grade has-text-white">--</h1>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-2">
+                        <div class="buttons is-right mb-0">
+                            <a class="button is-light mb-0" id="menu_button">
+                                <span class="icon"><i class="fas fa-bars"></i></span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paper -->
+            <div class="main_content section">
+                <div class="container is-fullhd">
+                    <div class="paper shadow20 is-loading" id="paper"></div>
+                </div>
+            </div>
+
+            <!-- Floating Toolbar -->
+            <div class="floating_toolbar shadow20 is-hidden">
+                <div class="columns is-vcentered">
+
+                    <div class="column is-3">
+                        <div class="buttons is-centered">
+                            <a class="button is-light previous is-invisible" data-tooltip="Load the previous submission">
+                                <span class="icon"><i class="fas fa-chevron-left"></i></span>
+                                <span>Previous</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="column is-6">
+                        <div class="grading_progress">
+                            <p class="is-size-6 has-text-white mb-1"></p>
+                            <div class="multi-progress">
+                                <div class="chunk is-blank" style="width:0%;"></div>
+                                <div class="chunk is-danger" style="width:0%"></div>
+                                <div class="chunk is-success" style="width:0%"></div>
+                            </div>
+                        </div>
+                        <p class="is-size-7 has-text-light has-text-centered mt-1">Editing submission #<span class="stat_current_page"></span>, out of <span class="stat_total_pages"></span> total.</p>
+                    </div>
+
+                    <div class="column is-3">
+                        <div class="buttons is-centered">
+                            <a class="button is-light next is-invisible" data-tooltip="Load the next submission">
+                                <span>Next</span>
+                                <span class="icon"><i class="fas fa-chevron-right"></i></span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+        <script>window.onload = loadup()</script>
+    </body>
+</html>

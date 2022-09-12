@@ -1,0 +1,55 @@
+<!doctype html>
+<html>
+    <head>
+
+        <title>Sheet Creator</title>
+        {{@includeFile(it.dir + "/views/partials/_tracking_header.squirrelly", it)/}}
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+    </head>
+    <body>
+
+        {{@includeFile(it.dir + "/views/home/partials/_navbar.squirrelly", it)/}}
+
+        <div class="view">
+
+            <div class="editor_navbar is-secondary">
+                <div class="container is-fullhd">
+                    <div class="twobox is-spaced">
+                        <div class="buttons is-centered-mobile mb-0 no-icons-mobile has-addons-mobile-only" id="edit_tools"></div>
+                        <div class="field has-addons">
+                            <div class="control">
+                                <a class="button is-softwhite" action="preview">
+                                    <span class="icon">
+                                        <i class="fas fa-external-link-alt"></i>
+                                    </span>
+                                    <span>Preview</span>
+                                </a>
+                            </div>
+                            <div class="control">
+                                <a class="button is-primary" action="save">
+                                    <span class="icon is-small"><i class="fas fa-save"></i></span>
+                                    <span>Save</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="editor_navbar_spacer is-secondary"></div>
+
+            <div class="editor"></div>
+        </div>
+
+        {{@includeFile(it.dir + "/views/partials/_global_foot.squirrelly", it)/}}
+
+        <script>
+            const _ID = null;
+            var default_brand = "{{it.default_brand}}";
+            var default_logo = "{{it.default_logo}}";
+        </script>
+
+        <script src="{{it.domain}}/js/authentication/authentication.js"></script>
+        <script src="{{it.domain}}/js/sheets/editor.js"></script>
+    </body>
+</html>

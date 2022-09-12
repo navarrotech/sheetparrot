@@ -1,0 +1,70 @@
+{
+    "images":{
+        "profile_picture":5,
+        "image_library":5,
+        "logo":3
+    },
+    "general":{
+        "first_name":60,
+        "last_name":60,
+        "email":100,
+        "password":32
+    },
+    "sheets":{
+        "sheetname":30,
+        "successMessage":120,
+        "sheet_password":30,
+        "headline":200,
+        "subheadline":200,
+        "video":{
+            "enabled":5,
+            "key":12,
+            "type":7
+        },
+        "theme":{ 
+            "logo":200,
+            "title":200,
+            "background":7,
+            "layout":15
+        },
+        "submission":{
+            "message":300
+        },
+        "due_date":{
+            "enabled":5,
+            "date": 13,
+            "allow_late_submissions": 5
+        }
+    },
+    "submissions":{
+        "notes":500
+    },
+    "card":{
+        "id":13,
+        "title":350,
+        "subtitle":350,
+        "hint":50,
+        "label":50,
+        "option_1": 100,
+        "option_2": 100,
+        "option_3": 100,
+        "option_4": 100,
+        "answer":2000,
+        "video_type":7,
+        "video_key": 12,
+        "dropdown":{
+            "label": 50
+        },
+        "multiline":{
+            "label":50,
+            "answer":200
+        },
+        "button":{
+            "label":50,
+            "href":200,
+            "target":6,
+            "size":"normal",
+            "color":"#42b1f9"
+        }
+    }
+}

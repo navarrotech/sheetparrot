@@ -1,0 +1,54 @@
+NEXT:
+/upgrade page + upgrade popup
+    --> Video + Copy
+    --> Upgrade video that shows all of the features they get. Will also be used in popup.
+/dashboard "how to use SheetParrot" video
+Put a default video onto the "create" page, that's pretty much a demo of SheetParrot.
+Homepage primary sales video
+Video needed for promptToUpgrade() popup!
+
+Known Bugs:
+❌ Authentication: Login with Facebook issue, if you try logging in as ADNavarro001@gmail.com and it says "please login with Facebook" the button is stuck loading
+❌ Mark as complete is asked immediately upon completing grading a sheet, but then it's immediately disabled?
+❌ Grader: Issue with refresh after they submit who they are?
+❌ User needs to be able to delete submission from the grader :)
+❌ Submissions list pagination needs tested & implemented
+
+TEST:
+Student: "My work" -> Work they have submitted, list of past submissions
+⚠️ Authentication: Login with Google/Facebook, no account found will auto-create. Worked on main login page, should try this on a sheet popup for login.
+⚠️ Saving a sheet from the public editor
+⚠️ Test submitting sheets thoroughly
+
+FINISHED:
+Teacher: (100%) "Grade submissions" -> Large list of ungraded submissions or "all caught up!"
+
+IGNORED WARNINGS:
+⚠️ Editor & view_details: Sheet not found page not built out
+⚠️ Multi progress bars, :lastchild => border-radius isn't working because width:0% but not last element.
+⚠️ Remove duplicates from history localstorage update on merge (I think I did this already?)
+⚠️ Internal error for public page will redirect to dashboard, but what if they aren't logged in? Needs to show a dedicated error page.
+
+FUTURE:
+Gamification
+Welcome beta users page
+Onboarding --> "Day 1: Let's get your first sheet created!" email sequence -- model upwork.
+"You're not ready to submit yet! You still have to answer 10 more questions..."
+Export button -> "Export to CSV" or "Export to PDF" or "Export to print"
+Crop incoming profile_picture images to be square (Or set all profile_picture images to style="background-image:url("{{PROFILE_PICTURE}}")")
+"Delete all submissions after x date" feature
+Auto grading -> Pro only feature
+Select checkboxes to select multiple for sheets, submissions, and anything else.
+View sheets list as a table/list
+Re-enable author line:
+    Author line has to be unique to each sheet, with a "set as default" option + input in the interface settings
+Submission search?
+Sheet search?
+"total answers" -> Each submission adds to a "total" count, adding to the total average.
+    For example: "10 submissions: 80% answered #1
+    (I think this needs to be an aggregation thing for speed)
+    -- This should be a part of a future 'reports' feature
+Get rid of function loginRequired
+Lead magnet?
+Grader feature, top bar: load up other sheets when they are clicked on
+"view all" submissions page: Sort by, filter, & search (search is tricky because we only have ID's for stuff... So we'll have to aggregate sheets collection & users collection, link them to their original sheets, and paginate to perform searches.)

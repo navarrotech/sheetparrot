@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>Loading...</title>
+        {{@includeFile(it.dir + "/views/partials/_tracking_header.squirrelly", it)/}}
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+    </head>
+    <body>
+        
+        <!-- Header -->
+        <div class="header_master shadow20">
+            <div class="container">
+                <nav class="navbar" role="navigation" aria-label="main navigation">
+                    <div class="navbar-brand">
+                        <a class="navbar-item" href="{{it.domain}}{{@if(it.authorized)}}/dashboard{{/if}}">
+                            <figure class="image is-48x48 prioritize_height">
+                                <img id="header_logo">
+                            </figure>
+                        </a>
+                        <!-- Mobile Menu -->
+                        <a role="button" class="navbar-burger" aria-label="menu">
+                            <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
+                        </a>
+                    </div>
+
+                    <div class="navbar-menu">
+                        <div class="navbar-start">
+                            <div class="navbar-item">
+                                <div>
+                                    <h2 class="title is-size-4" id="header_title"></h2>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="navbar-end is-hidden-touch">
+                        <div class="navbar-item is-hidden">
+                            <a class="button is-primary">Submit Work</a>
+                        </div>
+                        <div class="navbar-item navbar-replacement-nametag">
+                            <div class="buttons is-right">
+                                
+                                {{@if(it.authorized)}}
+                                <div class="dropdown is-right">
+                                    <div class="dropdown-trigger is-clickable">
+                                        <a class="nameBadge pl-4 pt-2 pb-2 mb-2">
+                                            <figure class="image is-48x48 mr-2"><img class="is-rounded" src="{{it.user.profile_picture}}"/></figure>
+                                            <div class="titles">
+                                                <h1 class="title is-5"><span>{{it.user.name}}</span><span class="icon"><i class="fas fa-sort-down"></i></span></h1>
+                                                <h2 class="subtitle is-7">{{it.user.email}}</h2>
+                                            </div>
+                                        </a>
+                                    </div>
+                                <div class="dropdown-menu" role="menu">
+                                    <div class="dropdown-content">
+                                        <a class="dropdown-item" href="{{it.domain}}/dashboard" target='_blank'>My Dashboard</a>
+                                        <hr class="dropdown-divider">
+                                        <a href="{{it.domain}}/logout?r={{it.domain}}/sheet/{{it.sheetid}}" class="dropdown-item">Logout</a>
+                                    </div>
+                                </div>
+                                </div>
+                                {{#else}}
+                                <a class="button is-light" data-action="login">
+                                    <span>Log in</span>
+                                </a>
+                                <a class="button is-primary" data-action="signup">
+                                    <span>
+                                        <strong>Sign up</strong>
+                                    </span>
+                                </a>
+                                {{/if}}
+                                
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+                <div class="hamburger-menu is-hidden-desktop"  role="menu">
+                    <aside class="menu">
+                        <ul class="menu-list">
+                            <div class="field is-grouped is-centered">
+                                {{@if(it.authorized)}}
+                                <div class="nameBadge">
+                                    <figure class="image is-48x48 mr-2"><img class="is-rounded" src="{{it.user.profile_picture}}"/></figure>
+                                    <div class="titles">
+                                        <h1 class="title is-5"><span>{{it.user.name}}</span></h1>
+                                        <h2 class="subtitle is-7">{{it.user.email}}</h2>
+                                    </div>
+                                </div>
+                                {{/if}}
+                            </div>
+                            <div style="height:10px;"></div>
+                            <a href="{{it.domain}}/dashboard">My Dashboard</a>
+                            {{@if(it.authorized && it.is_owner)}}
+                            <a href="{{it.domain}}/sheet/v2/edit?sheetid={{it.sheetid}}">Edit this Sheet</a>
+                            {{/if}}
+                            {{@if(!it.is_owner)}}<a>Submit Work</a>{{/if}}
+                            <a href="{{it.domain}}/settings" target="_blank">Settings</a>
+                            <hr class="dropdown-divider">
+                            <a href="{{it.domain}}/logout?r={{it.domain}}/sheet/{{it.sheetid}}">Logout</a>
+                        </ul>
+                    </aside>
+                </div>
+            </div>
+        </div>
+
+        <div class="root">
+            <div class="mt-8 pt-8">
+                <div class="loader is-large"></div>
+            </div>
+        </div>
+
+        {{@includeFile(it.dir + "/views/partials/_global_foot.squirrelly", it)/}}
+
+        <script>
+            const _ID = "{{it.sheetid}}";
+        </script>
+        <script src="{{it.domain}}/js/authentication/authentication.js" async></script>
+        <script src="{{it.domain}}/js/sheets/sheet.js"></script>
+        
+    </body>
+</html>

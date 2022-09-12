@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Refund Policy | SheetParrot</title>
+        {{@includeFile(it.dir + "/views/partials/_tracking_header.squirrelly", it)/}}
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+    </head>
+    <body>
+        <!-- Header -->
+        <div class="header shadow20 p-3">
+            <div class="container">
+                <nav class="navbar" role="navigation" aria-label="main navigation">
+                    <div class="navbar-brand">
+                        <a class="field is-grouped is-vcentered" href="{{it.domain}}/home">
+                            <figure class="image is-64x64">
+                                <img src="{{it.domain}}/images/logo.svg"/>
+                            </figure>
+                            <h4 class="subtitle is-cera is-size-2 has-text-weight-bold">SheetParrot Legal</h4>
+                        </a>
+                    </div>
+                </nav>
+            </div>
+        </div>
+        
+        <!-- Content -->
+        <div class="container is-fullhd p-2 mt-4">
+            <div class="buttons has-addons">
+                <a class="button is-link is-outlined" href="{{it.domain}}/home">Home</a>
+                <a class="button is-link is-outlined" href="{{it.domain}}/terms-of-service">Terms of service</a>
+                <a class="button is-link is-outlined" href="{{it.domain}}/privacy-policy">Privacy Policy</a>
+                <a class="button is-link" href="{{it.domain}}/refund-policy">Refund Policy</a>
+                <a class="button is-link is-outlined" href="{{it.domain}}/cookies">Cookie Policy</a>
+            </div>
+            <div class="box">
+                <h1 class="title is-size-2">Refund Policy</h1>
+                <h2 class="subtitle">Last Updated on July 12th, 2021</h2>
+                
+                <div class="content pb-4">
+                    If you'd like a refund, <a href="{{it.domain}}/support" target="_blank">contact us first</a>—do not delete your account. If you’re looking to close your SheetParrot account, you can cancel your account.
+                    <hr>
+                    <h1>When refunds are granted</h1>
+                    <p>If you were just charged for your next month of SheetParrot, but you meant to cancel, we're happy to refund that charge.</p>
+                    <p>If you forgot to cancel your monthly SheetParrot plan, and you haven't had any SheetParrot usage, we'll give you a full refund up to the last month. 
+                    <p>If you've purchased an annual plan within the past 30 days, we'll offer you a full refund if you request for it within 30 days of the charge.</p>
+                    <h1>When refunds are not granted</h1>
+                    <p>If you’ve purchased an annual plan and it's over 30 days old, we’ll issue credit to your account for the remaining balance on the annual plan. We do not offer refunds past the 30 day point.</p>
+                </div>
+            </div>
+            <a class="button is-primary" href="{{it.domain}}/home" style="margin-bottom:150px;">Back to home page</a>
+        </div>
+    </body>
+</html>

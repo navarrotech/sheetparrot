@@ -1,0 +1,28 @@
+<!doctype html>
+<html>
+    <head>
+        <title>SheetParrot | Billing</title>
+        {{@includeFile(it.dir + "/views/partials/_tracking_header.squirrelly", it)/}}
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+    </head>
+    <body>
+
+        <div class="view">
+                
+            <div class="app_view">
+                {{@includeFile(it.dir + "/views/partials/_header.squirrelly", it)/}}
+
+                <div class="app_content" id="content">
+                    <div class="loader is-medium"></div>
+                </div>
+
+            </div>
+            
+        </div>
+
+        {{@includeFile(it.dir + "/views/partials/_global_foot.squirrelly", it)/}}
+
+        <script src="https://js.stripe.com/v3/"></script>
+        <script src="{{it.domain}}/js/billing/billing.js"></script>
+    </body>
+</html>

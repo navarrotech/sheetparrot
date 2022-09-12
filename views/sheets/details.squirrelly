@@ -1,0 +1,304 @@
+<!doctype html>
+<html>
+    <head>
+        <title>{{it.sheet.sheetname}}</title>
+        {{@includeFile(it.dir + "/views/partials/_tracking_header.squirrelly", it)/}}
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+        
+        <script>const sheetid="{{it.sheet._id}}", sheet_name="{{it.sheet.sheetname}}", logged_in_user="{{it.user.email}}"</script>
+        
+        <style>
+            .table th:last-child, .table td:last-child{
+                text-align:right;
+            }
+            .table th:first-child, .table td:first-child{
+                width:calc(1.5em + 48px);
+            }
+            .table th, .table td{
+                vertical-align: middle;
+            }
+            .status, .question-status{
+                display:block;
+                border:2px solid transparent;
+                border-radius:4px;
+                padding:0.5em .75em;
+                width:fit-content;
+            }
+            .status.is-blank{
+                color:rgba(39, 40, 44, 0.8);
+                border-color:rgba(135, 135, 139, 0.6);
+                background:rgba(135, 135, 139, 0.05)
+            }
+            .status.is-submitted, .status-new{
+                color:rgba(39, 40, 44, 0.6);
+                border-color:var(--warning);
+                background:rgba(247, 240, 180, 0.1)
+            }
+            .status.is-assigned, .status-skipped{
+                color:var(--link);
+                border-color:var(--link);
+                background:rgba(180, 187, 247, 0.1)
+            }
+            .status.is-graded, .status-answered{
+                color:var(--success);
+                border-color:var(--success);
+                background:rgba(180, 247, 183, 0.1)
+            }
+            .status.is-danger, .status-overdue{
+                color:var(--danger);
+                border-color:var(--danger);
+                background:rgba(247, 180, 180, 0.1)
+            }
+            .searcher{
+                position:relative;
+            }
+            .searcher .searchbar{
+                position:absolute;
+                width:100%;
+                left:0;
+                right:0;
+                max-height:130px;
+                overflow:auto;
+                background:#fff;
+                border-radius:8px;
+                display:none;
+            }
+            .searcher .searchbar.is-active{
+                display:block;
+            }
+            .searcher .searchbar a{
+                padding:0.75em 0.5em;
+                display:flex;
+                width:100%;
+                justify-content: space-between;
+            }
+            .searcher .searchbar a:hover{
+                background:#f4f5f7;
+            }
+            .searcher .searchbar a.is-selected{
+                display:none!important;
+                pointer-events:none!important;
+            }
+            .searcher .searchbar::after{
+                display:block;
+                padding:0.75em 0.5em;
+                content:"-- End of results --";
+                text-align:center;
+                color:rgb(173, 173, 173);
+                width:100%;
+            }
+            .searcher .searchbar a span{
+                text-overflow:ellipsis;
+                overflow:hidden;
+                white-space: nowrap;
+                pointer-events: none;
+            }
+            .searcher .searchbar a:nth-child(odd) {
+                background-color: #f0f2f5;
+            }
+            .searcher .searchbar a span:first-child{
+                max-width:80%;
+            }
+            .searcher .searchbar a span:last-child{
+                max-width:20%;
+            }
+            .app_content{
+                max-height:calc(100vh - 118px)!important;
+            }
+            #results_count{
+                display:block;
+                text-align:right;
+                width:100%;
+                margin-top:10px;
+            }
+            .card_image{
+                margin:15px 0;
+            }
+            .card_image img{
+                height:100%;
+                display:block;
+                margin:0 auto 0;
+                width:unset !important;
+            }
+            .activity{
+                display:flex;
+                flex-direction:column;
+            }
+            .activity .text{
+                margin-left:17px;
+            }
+            .activity .text > :first-child{
+                margin-bottom: -4px;
+            }
+            .graph{
+                max-height:400px;
+                height:400px;
+                padding-bottom:4em;
+            }
+            @media only screen and (max-width:768px){
+                .second_toolbar .buttons{ flex-direction:column; width:100%; }
+                .second_toolbar .buttons .button{ width:100%; margin-bottom:0.5em !important; margin-right:0 !important; }
+                .innertabs{ padding-top:30px; }
+                #results_count{ left:25px; text-align:center!important; }
+                #third_toolbar .buttons,#third_toolbar .button{ width:100%; }
+            }
+            @media only screen and (min-width:1023px){
+                .is-archived{ opacity:0.3; }
+                .is-archived:hover{ opacity:1; }
+            }
+            @media only screen and (max-width:1023px){
+                .long_question{  max-width:160px; }
+            }
+        </style> 
+    </head>
+    <body>
+        <div class="view">
+            
+            <div class="app_view">
+                
+                {{@includeFile(it.dir + "/views/partials/_header.squirrelly", it)/}}
+
+                {{@includeFile(it.dir + "/views/partials/_notifications.squirrelly", it)/}}
+
+
+                <!-- Content -->
+                <div>
+                    <div class="app_content">
+
+                        <!-- Upper toolbar -->
+                        <div class="container is-max-widescreen twobox">
+                            <div>
+
+                                <h1 class="is-size-1 has-text-weight-bold">Sheet: {{it.sheet.sheetname}}</h1>
+                                <nav class="breadcrumb has-arrows-separator mb-0 is-size-7" aria-label="breadcrumbs">
+                                    <ul>
+                                        <li class="is-blue">
+                                            <a class="crumb" href="{{it.domain}}/sheets">
+                                                <span class="icon"><i class="fas fa-home"></i></span>
+                                                <span>My Sheets</span>
+                                            </a>
+                                        </li>
+                                        {{@if(it.folder && it.folder.path != "root")}}
+                                        <li class="is-{{(it.folder.color || 'blue')}}">
+                                            <a class="crumb" href="{{it.domain}}/sheets?f={{it.folder._id}}">
+                                                <span class="icon"><i class="far fa-folder"></i></span>
+                                                <span>{{it.folder.name}}</span>
+                                            </a>
+                                        </li>
+                                        {{/if}}
+                                        <li class="is-active">
+                                            <p class="crumb" aria-current="page">
+                                                <span class="icon"><i class="far fa-file-alt"></i></span>
+                                                <span>{{it.sheet.sheetname}}</span>
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </nav>
+
+                            </div>
+                            <div class="buttons is-right has-addons">
+
+                                <a class="button" href="{{it.domain}}/sheet/v2/edit?sheetid={{it.sheet._id}}">
+                                    <span class="icon"><i class="fas fa-edit"></i></span>
+                                    <span>Edit</span>
+                                </a>
+                                <div class="dropdown">
+                                    <div class="dropdown-trigger">
+                                        <a class="button" style="border-radius:0">
+                                            <span class="icon">
+                                                <i class="fas fa-share-nodes" aria-hidden="true"></i>
+                                            </span>
+                                            <span>Share</span>
+                                        </a>
+                                    </div>
+                                    <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                        <div class="dropdown-content">
+                                            <a href="{{it.domain}}/sheet/{{it.sheet._id}}" target="_blank" class="dropdown-item">
+                                                <span><i class="fas fa-up-right-from-square"></i></span>
+                                                <span>New Tab</span>
+                                            </a>
+                                            <hr class="dropdown-divider">
+                                            <a data-copy="{{it.domain}}/sheet/{{it.sheet._id}}" data-show-success="true" class="dropdown-item copy_me">
+                                                <span><i class="fas fa-link"></i></span>
+                                                <span>Copy Link</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--<a class="button" href="{{it.domain}}/submissions/grader/v1/{{it.sheet._id}}">
+                                    <span class="icon"><i class="fas fa-pen-fancy"></i></span>
+                                    <span>Grade Submissions</span>
+                                </a>-->
+                                <a class="button" href="{{it.domain}}/sheet/{{it.sheet._id}}" target="_blank">
+                                    <span class="icon"><i class="fas fa-external-link-alt"></i></span>
+                                    <span>Preview</span>
+                                </a>
+
+                            </div>
+                        </div>
+
+                        <div class="container is-max-widescreen block">
+                            <!-- Tabs -->
+                            <div class="tabs mb-4 mt-4">
+                                <ul>
+                                    <li id="tab_overview"><a><span>Overview</span></a></li>
+                                    <li id="tab_submissions"><a><span>Submissions</span></a></li>
+                                    <li><a href="{{it.domain}}/sheet/v2/edit?sheetid={{it.sheet._id}}"><span>Edit Sheet</span></a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="container is-max-widescreen block">
+                            <div class="buttons is-right" id="third_toolbar"></div>
+                        </div>
+
+                        <!-- Dynamic content gets loaded into here -->
+                        <div class="container is-max-widescreen block"><div id="results"><div class="loader medium"></div></div></div>
+                        
+                        <div class="container is-max-widescreen">
+                            <span id="results_count"></span>
+                        </div>
+
+                        <div class="container is-max-widescreen block is-bottom">
+                            <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+                                <ul class="pagination-list" id="paginator"></ul>
+                            </nav>
+                        </div>
+
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+
+        {{@includeFile(it.dir + "/views/partials/_global_foot.squirrelly", it)/}}
+        
+        <script>initModal('reply_to_question')</script>
+
+        <script src="{{it.domain}}/js/sheets/view.js"></script>
+
+        <!-- Copy Text Button -->
+        <script>
+            (function(){
+                let copy = $QS('.copy_me'),
+                    text = copy.querySelector('span:not(.icon)')
+                copy.addEventListener('click', async () => {
+
+                    await navigator.clipboard.writeText("{{it.domain}}/sheet/{{it.sheet._id}}")
+                        .catch(err => { console.log('Something went wrong', err) });
+
+                    $CLASS(copy, 'is-success', true)
+                    $CLASS(copy, 'is-primary', false)
+
+                    text.innerHTML = "Copied!"
+
+                    setTimeout(() => {
+                        text.innerHTML = "Copy Share Link"
+                        $CLASS(copy, 'is-success', false)
+                    }, 2000)
+                })
+            })()
+        </script>
+
+    </body>
+</html>

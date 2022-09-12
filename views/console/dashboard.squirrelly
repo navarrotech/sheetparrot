@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SheetParrot Console</title>
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+        <link rel="stylesheet" href="{{it.domain}}/css/console.css?version={{it.css_version}}">
+        
+        <script src="{{it.domain}}/js/vendor/chart.js"></script>
+        <script>const DOMAIN="{{it.domain}}"</script>
+    </head>
+    <body>
+        {{@includeFile(it.dir + "/views/console/_headerbar.squirrelly", it)/}}
+        <div class="app">
+            {{@includeFile(it.dir + "/views/console/_sidebar.squirrelly", it)/}}
+            <div class="main">
+                <div class="splash">
+                    <h1 class="title has-text-white has-text-centered">Welcome back {{it.user.first_name}}</h1>
+                </div>
+                <div class="window container is-fullhd">
+                    <div class="columns p-4">
+                        <div class="column">
+                            <a class="box cloud is-warning" href="{{it.domain}}/console/users">
+                                <div class="icon"><i class="fas fa-users fa-2x"></i></div>
+                                <h1 class="title">{{it.total_users}}</h1>
+                                <p class="subtitle">Total users</p>
+                                <p class="help is-success"><span class="icon"><i class="fas fa-chevron-up"></i></span><span>+ {{it.total_users_last30}}</span><span class="has-text-grey"> up last 30 days</span></p>
+                            </a>
+                        </div>
+                        <div class="column">
+                            <a class="box cloud is-success" href="{{it.domain}}/console/users">
+                                <div class="icon"><i class="fas fa-monument fa-2x"></i></div>
+                                <h1 class="title">{{it.total_paying}}</h1>
+                                <p class="subtitle">Paying users</p>
+                                <p class="help is-success"><span class="icon"><i class="fas fa-chevron-up"></i></span><span>+ {{it.total_paying_last30}}</span><span class="has-text-grey"> up last 30 days</span></p>
+                            </a>
+                        </div>
+                        <div class="column">
+                            <a class="box cloud is-link" href="{{it.domain}}/console/sheets">
+                                <div class="icon"><i class="fas fa-gem fa-2x"></i></div>
+                                <h1 class="title">{{it.total_sheets}}</h1>
+                                <p class="subtitle">Total Sheets</p>
+                                <p class="help is-success"><span class="icon"><i class="fas fa-chevron-up"></i></span><span>+ {{it.total_sheets_last30}}</span><span class="has-text-grey"> up last 30 days</span></p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="field has-addons has-addons-centered user_lookup">
+                        <div class="control">
+                            <input class="input shadow20" type="text" placeholder="User Lookup" id="userLookupInput">
+                        </div>
+                        <div class="control">
+                            <a class="button is-link shadow20" id="searchGlass"><span class="icon"><i class="fas fa-search"></i></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script>
+            let input  = $QS('#userLookupInput'),
+                search = $QS('#searchGlass')
+
+            function searchNow(){
+                $CLASS(search, 'is-loading', true)
+                if(input.value !== '')
+                    window.location.href = `{{it.domain}}/console/users?search=${input.value}`
+                else
+                    window.location.href = `{{it.domain}}/console/users`
+            }
+
+            (function(){
+                input.addEventListener('keyup', (event) => {
+                    if (event.keyCode === 13) {
+                        // Cancel the default action, if needed
+                        event.preventDefault();
+                        searchNow()
+                    }
+                })
+                input.focus()
+                search.addEventListener('click', () => searchNow())
+            })()
+        </script>
+    </body>
+</html>

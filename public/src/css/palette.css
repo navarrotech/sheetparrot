@@ -1,0 +1,33 @@
+@charset "utf-8";
+
+:root{
+    /* New Colors V3 */
+    --primary:#42b1f9;
+    --primaryHighlight:#7dcfff;
+    --success:#23c554;
+    --successHighlight:#24AD4D;
+    --warning:#fed349;
+    --warningHighlight:#f7cf4c;
+    --danger:#ef3922;
+    --dangerHighlight:#ff1e00;
+    --info:#07cdff;
+    --infoHighlight:#06c1f0;
+    --link: #4285F4;
+    --linkHighlight: #4d8df5;
+    --dark:#35303b;
+    --darkHighlight:#413c47;
+    --light:#f0f2f5;
+}
+
+.sheet--theme--red   { background:#920e13; }
+.sheet--theme--pink  { background:#bb4db1; }
+.sheet--theme--orange{ background:#cf8a2f; }
+.sheet--theme--yellow{ background:#fff7ba; }
+.sheet--theme--green { background:#2d9c4c; }
+.sheet--theme--forest{ background:#1c6829; }
+.sheet--theme--cyan  { background:#009fa5; }
+.sheet--theme--blue  { background:#1F3A8A; }
+.sheet--theme--purple{ background:#553270; }
+.sheet--theme--white { background:#bbbbbd; }
+.sheet--theme--grey  { background:#616772; }
+.sheet--theme--black { background:#1E1E24; }

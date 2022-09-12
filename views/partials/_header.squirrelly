@@ -1,0 +1,84 @@
+<div class="ColorRibbon"></div>
+<div class="nav2 shadow20">
+    <div class="innerItems">
+        <div class="logoholder">
+            <a class="image is-48x48 mr-4" href="{{it.domain}}">
+                <img src="{{it.domain}}/images/logo.svg"/>
+            </a>
+            <p class="is-hidden-desktop">SheetParrot</p>
+        </div>
+        <a class="nav2-item {{@if(it.requesting_page.startsWith('/dashboard'))}}is-active{{/if}}" href="{{it.domain}}/dashboard">
+            <span>Dashboard</span>
+        </a>
+        {{@if(it.user && it.user.type == 'teacher')}}
+        <a class="nav2-item {{@if(it.requesting_page.startsWith('/sheets'))}}is-active{{/if}}" href="{{it.domain}}/sheets">
+            <span>My Sheets</span>
+        </a>
+        {{/if}}
+        <a class="nav2-item {{@if(it.requesting_page.startsWith('/viewall/submissions'))}}is-active{{/if}}" href="{{it.domain}}/viewall/submissions">
+            <span>Submissions</span>
+        </a>
+    </div>
+    <div class="dropdown is-right is-hidden-touch">
+        <div class="dropdown-trigger">
+            <div class="image is-48x48 is-clickable">
+                <img class="is-rounded" src="{{it.user.profile_picture}}"/>
+            </div>
+        </div>
+        <div class="dropdown-menu" role="menu" style="max-width:225px;">
+            <div class="dropdown-content">
+                <div class="dropdown-item">
+                    <h1 class="title is-size-6 is-capitalized wsnw">{{it.user.name}}</h1>
+                    <p class="subtitle is-size-7 wsnw">{{it.user.email}}</p>
+                </div>
+                <hr class="dropdown-divider">
+                <a href="{{it.domain}}/settings" class="dropdown-item">Account Settings</a>
+                {{@if(it.user && it.user.preferences.billing.plan == "free")}}
+                <a href="{{it.domain}}/upgrade" class="dropdown-item is-link">Upgrade Plan</a>
+                {{#else}}
+                <a href="{{it.domain}}/billing" class="dropdown-item">Manage Billing</a>
+                {{/if}}
+                <a href="{{it.domain}}/support" target="_blank" class="dropdown-item">Customer Support</a>
+                <hr class="dropdown-divider">
+                <a href="{{it.domain}}/logout" class="dropdown-item">Logout</a>
+            </div>
+        </div>
+    </div>
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+    </a>
+</div>
+
+<div class="hamburger-menu"  role="menu">
+    <aside class="menu">
+        <ul class="menu-list">
+            <div class="field is-grouped is-centered">
+                <div class="image is-64x64">
+                    <img class="is-rounded" src="{{it.user.profile_picture}}"/>
+                </div>
+                <div class="ml-4 mt-2">
+                    <h1 class="title is-size-4 wsnw" style="max-width:180px;">{{it.user.name}}</h1>
+                    <p class="subtitle is-size-5 wsnw" style="max-width:180px;">{{it.user.email}}</p>
+                </div>
+            </div>
+            <div style="height:10px;"></div>
+            <a href="{{it.domain}}/dashboard" class="{{@if(it.requesting_page.startsWith('/dashboard'))}}is-active{{/if}}">Dashboard</a>
+            {{@if(it.user && it.user.type == 'teacher')}}
+            <a href="{{it.domain}}/sheets" class="{{@if(it.requesting_page.startsWith('/sheets'))}}is-active{{/if}}">My Sheets</a>
+            {{/if}}
+            <a href="{{it.domain}}/viewall/submissions" class="{{@if(it.requesting_page.startsWith('/viewall/submissions'))}}is-active{{/if}}">Submissions</a>
+            <hr class="dropdown-divider">
+            <a href="{{it.domain}}/settings" class="{{@if(it.requesting_page.startsWith('/settings'))}}is-active{{/if}}">Account Settings</a>
+            {{@if(it.user && it.user.preferences.billing.plan == "free")}}
+            <a href="{{it.domain}}/billing" style="color:var(--link);">Upgrade Plan</a>
+            {{#else}}
+            <a href="{{it.domain}}/billing">Manage Billing</a>
+            {{/if}}
+            <a href="{{it.domain}}/support" target="_blank">Customer Support</a>
+            <a href="{{it.domain}}/logout">Logout</a>
+        </ul>
+    </aside>
+</div>
+<div class="nav2-spacer"></div>

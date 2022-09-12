@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>SheetParrot | The future of homework online</title>
+        {{@includeFile(it.dir + "/views/partials/_globalHeader.squirrelly", it)/}}
+        
+        <!-- Page-specific metadata -->
+        <meta property="og:title" content="SheetParrot">
+        <meta property="og:description" content="">
+        <meta class="metaTagTop" name="description" content="">
+    </head>
+
+    <body>
+        {{@includeFile(it.dir + "/views/partials/_navbar.squirrelly", it)/}}
+        <div class="navspacer"></div>
+        
+        <section class="hero is-large is-primary">
+            <div class="hero-body has-text-centered">
+                <p class="title">In Progress</p>
+                <p class="subtitle">This area is still under development</p>
+            </div>
+        </section>
+
+        {{@includeFile(it.dir + "/views/partials/_footer.squirrelly", it)/}} 
+
+        {{@includeFile(it.dir + "/views/partials/_global_foot.squirrelly", it)/}}
+        <script>let p = new Pricing("NONE");</script>
+        <script>cookieBanner();</script>
+    </body>
+</html>

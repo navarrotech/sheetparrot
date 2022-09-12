@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SheetParrot Console | Sheets</title>
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+        <link rel="stylesheet" href="{{it.domain}}/css/console.css?version={{it.css_version}}">
+        <script src="{{it.domain}}/js/vendor/chart.js"></script>
+        <script>const DOMAIN="{{it.domain}}"</script>
+        <style>
+            .table * {
+                vertical-align: middle !important;
+            }
+        </style>
+    </head>
+    <body>
+        {{@includeFile(it.dir + "/views/console/_headerbar.squirrelly", it)/}}
+        <div class="app">
+            {{@includeFile(it.dir + "/views/console/_sidebar.squirrelly", it)/}}
+            <form class="main" method="GET">
+                <input class="is-hidden" id="goto_page" name="page">
+                <div class="splash">
+                    <h1 class="title is-size-1 has-text-white has-text-centered mb-0 is-hidden-mobile">Viewing all sheets</h1>
+                </div>
+                <div class="window container is-fullhd is-bottom">
+                    <div class="box">
+                        <div class="twobox is-centered mb-4">
+
+                                <div class="field has-addons mb-0">
+                                    <div class="control full-on-mobile">
+                                        <input autocomplete="off" class="input" type="text" placeholder="Filter User Name" name="filter_uname" {{@if(it.filter_uname)}}value="{{it.filter_uname}}"{{/if}}>
+                                    </div>
+                                    {{@if(it.filter_uname)}}
+                                    <div class="control">
+                                        <button class="button is-light ml-0 mr-0" type="button" data-action="clearer" data-link="filter_uname">
+                                            <span class="icon"><i class="fas fa-times"></i></span>
+                                        </button>
+                                    </div>
+                                    {{/if}}
+                                    <div class="control">
+                                        <button class="button is-primary ml-0 mr-0" type="submit" onclick="this.classList.add('is-loading')">
+                                            <span class="icon"><i class="fas fa-search"></i></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="field has-addons mb-0">
+                                    <div class="control full-on-mobile">
+                                        <input autocomplete="off" class="input" type="text" placeholder="Filter Sheet Name" name="filter_sname" {{@if(it.filter_sname)}}value="{{it.filter_sname}}"{{/if}}>
+                                    </div>
+                                    {{@if(it.filter_sname)}}
+                                    <div class="control">
+                                        <button class="button is-light ml-0 mr-0" type="button" data-action="clearer" data-link="filter_sname">
+                                            <span class="icon"><i class="fas fa-times"></i></span>
+                                        </button>
+                                    </div>
+                                    {{/if}}
+                                    <div class="control">
+                                        <button class="button is-primary ml-0 mr-0" type="submit" onclick="this.classList.add('is-loading')">
+                                            <span class="icon"><i class="fas fa-search"></i></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="field has-addons mb-0">
+                                    <div class="control full-on-mobile">
+                                        <input autocomplete="off" class="input" type="text" placeholder="Filter email" name="filter_email" {{@if(it.filter_email)}}value="{{it.filter_email}}"{{/if}}>
+                                    </div>
+                                    {{@if(it.filter_email)}}
+                                    <div class="control">
+                                        <button class="button is-light ml-0 mr-0" type="button" data-action="clearer" data-link="filter_email">
+                                            <span class="icon"><i class="fas fa-times"></i></span>
+                                        </button>
+                                    </div>
+                                    {{/if}}
+                                    <div class="control">
+                                        <button class="button is-primary ml-0 mr-0" type="submit" onclick="this.classList.add('is-loading')">
+                                            <span class="icon"><i class="fas fa-search"></i></span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                        </div>
+                        <table class="table is-striped is-hoverable is-fullwidth is-narrow">
+                            <thead>
+                                <tr>
+                                    <th><span class="is-hidden-mobile">Name</span><span class="is-hidden-tablet">Sheet</span></th>
+                                    <th class="is-hidden-mobile">Sheet owner</th>
+                                    <th class="is-hidden-mobile">Submissions</th>
+                                    <th class="is-hidden-mobile">Privacy</th>
+                                    <th class="is-hidden-mobile">Last modified</th>
+                                    <th class="is-hidden-mobile">Created</th>
+                                    <th class="has-text-right">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{@each(it.content.sheets) => sheet}}
+                                <tr>
+                                    <td><p class="is-size-6">{{sheet.sheetname}}</p><a class="is-size-6 is-hidden-tablet" href="/console/t/getUserByEmail?email={{sheet.owner}}" onclick="showLoading()">{{sheet.author.name}}</a></td>
+                                    <td class="is-hidden-mobile"><a class="is-size-6" href="/console/t/getUserByEmail?email={{sheet.owner}}" onclick="showLoading()">{{sheet.author.name}}</a></td>
+                                    <td class="is-hidden-mobile"><p class="is-size-6">{{sheet.submissions}}</p></td>
+                                    <td class="is-hidden-mobile"><p class="is-size-6">{{@if(sheet.privacy == 'password')}}password{{#else}}{{sheet.privacy}}{{/if}}</p></td>
+                                    <td>
+                                        <div class="buttons is-right are-small">
+                                            <div class="field has-addons" style="justify-content: flex-end;">
+                                                <p class="control">
+                                                    <a class="button ml-0 mr-0 is-primary" href="/console/sheet/{{sheet.sheetid}}">
+                                                        <span>View</span>
+                                                    </a>
+                                                </p>
+                                                <p class="control ml-0">
+                                                    <a class="button ml-0 mr-0 is-link" href="/sheet/{{sheet.sheetid}}" target="_blank">
+                                                        <span class="icon"><i class="fas fa-link"></i></span>
+                                                    </a>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    <p class="is-size-7 has-text-right">Showing {{@if(it.pagination.limit > it.content.total)}}{{it.content.total}}{{#else}}{{it.pagination.limit}}{{/if}} of {{it.content.total}} results</p>
+                    </div>
+                    {{@if(it.pagination.final_page !== 1)}}
+                    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+                        <ul class="pagination-list">
+                            
+                            {{@if( (it.pagination.current) > 2 )}}
+                            <li><a class="pagination-link">1</a></li>
+                            <li><span class="pagination-ellipsis">&hellip;</span></li>
+                            {{/if}}
+
+                            {{@if( (it.pagination.current - 1) > 0 )}}
+                            <li><a class="pagination-link">{{it.pagination.current - 1}}</a></li>
+                            {{/if}}
+
+                            <li><a class="pagination-link is-current">{{it.pagination.current}}</a></li>
+                            
+                            {{@if( (it.pagination.current + 1) < (it.pagination.final_page + 1) )}}
+                            <li><a class="pagination-link">{{it.pagination.current + 1}}</a></li>
+                            {{/if}}
+                            
+                            {{@if( (it.pagination.final_page - it.pagination.current) >= 2 )}}
+                            <li><span class="pagination-ellipsis">&hellip;<span></li>
+                            <li><a class="pagination-link">{{it.pagination.final_page}}</a></li>
+                            {{/if}}
+                        </ul>
+                    </nav>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        <script>
+            (function(){
+                let page_links = $QSA(".pagination-link"),
+                    page_input = $QS('#goto_page'),
+                    main_form  = $QS('form')
+
+                page_links.forEach(pl => {
+                    pl.addEventListener('click', () => {
+                        page_input.value = pl.innerHTML
+                        main_form.submit()
+                    })
+                })
+
+                let clearers   = $QSA('button[data-action=clearer]')
+
+                clearers.forEach(clearer => {
+                    clearer.addEventListener('click', () => {
+                        console.log('clicked')
+                        let searchbar = $QS('input[name=' + clearer.getAttribute('data-link') + ']')
+                        if(searchbar)
+                            searchbar.value = ""
+                        $CLASS(clearer, 'is-loading', true)
+                        main_form.submit()
+                    })
+                })
+            })()
+        </script>
+    </body>
+</html>

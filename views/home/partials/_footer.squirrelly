@@ -1,0 +1,64 @@
+<style>
+    .footer{
+        background:var(--light);
+        font-family:'Montserrat', Helvetica, sans-serif;
+        padding:2.5rem 3.5rem;
+    }
+    .footer .links a{
+        display:inline-block;
+        margin-right:15px;
+        font-weight:bold!important;
+    }
+    .footer *{
+        color:#31363a;
+    }
+    .footer .logo-text{
+        font-size:28px;
+        font-family:'Gotham-Bold', 'Montserrat', Helvetica, Arial, sans-serif;
+    }
+    @media only screen and (max-width:768px){
+        .footer{ padding-left:0.5em; padding-right:0.5em; }
+        .footer{ text-align: center; }
+        .footer .icon-text{ justify-content: center; }
+        .footer-logo-holder{ padding:1em 0 2em; }
+    }
+</style>
+<footer class="footer">
+    <div class="container is-max-desktop">
+        <div class="twobox">
+            <div>
+                <div class="field">
+                <div class="icon-text">
+                    <span class="icon"><i class="far fa-paper-plane"></i></span>
+                    <span>sheetparrot.com © 2021+ All Rights Reserved</span>
+                </div>
+                <div class="icon-text">
+                    <span class="icon"><i class="far fa-envelope"></i></span>
+                    <span>support@sheetparrot.com</span>
+                </div>
+            </div>
+                <div class="field">
+                    <div class="links">
+                        <a href="{{it.domain}}/terms-of-service">Terms<span class="is-hidden-touch"> Of Service</span></a>
+                        <a href="{{it.domain}}/privacy-policy">Privacy<span class="is-hidden-touch"> Policy</span></a>
+                        <a href="{{it.domain}}/refund-policy">Refund<span class="is-hidden-touch"> Policy</span></a>
+                    </div>
+                    <div class="links">
+                        <a href="{{it.domain}}/cookies">Cookies</a>
+                        <a href="{{it.domain}}/support"><span class="is-hidden-touch">Customer </span>Support</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-logo-holder">
+                <a href="{{it.domain}}">
+                    <div class="twobox is-centered also-mobile">
+                        <figure class="image is-64x64">
+                            <img src="{{it.domain}}/images/logo.svg"/>
+                        </figure>
+                        <span class="logo-text">SheetParrot</span>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>

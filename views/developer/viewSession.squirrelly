@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+    <head>
+        <title>SheetParrot | Profile</title>
+        {{@includeFile(it.dir + "/views/partials/_tracking_header.squirrelly", it)/}}
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+    </head>
+    <body>
+        <div class="view">
+            <div class="container is-max-desktop mt-6 pt-6 is-bottom">
+                <div class="box">
+                    {{@if(it.authorized)}}
+
+                    <aside class="menu">
+
+                    {{@foreach(Object.keys(it.user)) => index, key}}
+
+                        {{@if(typeof it.user[key] != 'object')}}
+                            <ul class="menu-list">
+                                <li><a>
+                                    <span class="has-text-weight-bold">{{key}}</span> => <span>{{it.user[key]}}</span>
+                                </a></li>
+                            </ul>
+                        {{#else}}
+                            <p class="menu-label">
+                                {{key}}
+                            </p>
+                            <ul class="menu-list">
+                            {{@foreach(Object.keys(it.user[key])) => indexB, keyB}}
+                                
+                                {{@if(typeof it.user[key][keyB] != 'object')}}
+                                    <li><a class="has-text-black">
+                                        <span class="has-text-weight-bold">{{keyB}}</span> => <span>{{it.user[key][keyB]}}</span>
+                                    </a></li>
+                                {{#else}}
+                                    <li>
+                                    <a>{{keyB}}</a>
+                                    <ul>
+                                    {{@foreach(Object.keys(it.user[key][keyB])) => indexC, keyC}}
+                                        {{@if(typeof it.user[key][keyB][keyC] != 'object')}}
+                                            <li><a class="has-text-black">
+                                                <span class="has-text-weight-bold">{{keyC}}</span> => <span>{{it.user[key][keyB][keyC]}}</span>
+                                            </a></li>
+                                        {{#else}}
+                                            <li><a class="has-text-black">
+                                                <span class="has-text-weight-bold">{{keyC}}</span> => <span>{{JSON.stringify(it.user[key][keyB][keyC])}}</span>
+                                            </a></li>
+                                        {{/if}}
+                                    {{/foreach}}
+                                    </ul>
+                                </li>
+                                {{/if}}
+
+                            {{/foreach}}
+                            </ul>
+                        {{/if}}
+                    {{/foreach}}
+                    </aside>
+
+                    {{#else}}
+                    <div>No session is active</div>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+        {{@includeFile(it.dir + "/views/partials/_global_foot.squirrelly", it)/}}
+    </body>
+</html>

@@ -1,0 +1,73 @@
+<!doctype html>
+<html style="background: #2e2f32;">
+    <head>
+        <title>SheetParrot | Login</title>
+        
+        {{@includeFile(it.dir + "/views/partials/_tracking_header.squirrelly", it)/}}
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+    </head>
+    
+    <body>
+        {{@includeFile(it.dir + "/views/home/partials/_navbar.squirrelly", it)/}}
+        <div class="navspacer is-hidden-desktop"></div>
+
+        <div style="
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url(/images/parrot-wing.jpg);
+            background-size: cover;
+            background-position: 50%;
+            opacity: 0.6;
+            filter: blur(4px);
+        "></div>
+
+        <section>
+
+            <div class="hero is-fullheight-with-navbar">
+                <div class="hero-body no-padding">
+                    <div class="container">
+
+                        <div class="columns">
+
+                            <div class="column"></div>
+
+                            <div class="column is-3 is-auth">
+                                
+                                <div class="block is-hidden-mobile">
+                                    <a class="image is-96x96 is-centered" href="{{it.domain}}">
+                                        <img class="logo" src="{{it.domain}}/images/logo.svg" alt/>
+                                    </a>
+                                </div>
+
+                                <div class="block authParent"><div class="loader is-medium"></div></div>
+            
+                            </div>
+
+                            <div class="column"></div>
+                            
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        {{@includeFile(it.dir + "/views/partials/_global_foot.squirrelly", it)/}}
+
+        <script src="{{it.domain}}/js/authentication/authentication.js"></script>
+
+        <script>let auth = new Authenticator({ type:"any", auth:"login", isWhite:true }); auth.render(); $('.authParent').html( auth.elements._root );</script>
+        <script>
+            /* Why they were logged out of their account message */
+            !function(){
+                let logout_status = "{{@if(it.logout_reason)}}{{it.logout_reason}}{{/if}}";
+                if(!logout_status){ return; }
+                if(logout_status == "mustlogin"){ toast("You must be logged in to access your account.", "warning", true, false); return; }
+                if(logout_status == "private_page"){ toast("You must login to access that page!", "danger", true, false); return; }
+            }();
+        </script>
+    </body>
+</html>

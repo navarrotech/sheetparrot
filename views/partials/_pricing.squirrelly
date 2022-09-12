@@ -1,0 +1,507 @@
+<!-- Pricing -->
+<div class="block container is-max-desktop pricingHeader">
+
+    <div class="pricing-header">
+        <div class="pricing-text is-cera">
+            <h1 class="title superTitle has-text-weight-bold mb-0 has-text-centered-mobile">Pricing Optimized<br>For Teachers</h1>
+            <h2 class="title has-text-weight-light is-size-2 has-text-centered-mobile">Designed to <span class="has-text-primary has-text-weight-semibold">replace the cost of<br class="is-hidden-mobile"> paper and ink</span> per month</h2>
+            <!--<div class="pill">
+                <div class="left">
+                    <span>For Individuals</span>
+                </div>
+                <div class="right">
+                    <span>For Schools</span>
+                </div>
+                <div class="pillObj"></div>
+            </div>-->
+        </div>
+    </div>
+    <div class="pricing-people">
+        <img src="{{it.domain}}/images/pricing_header.png"/>
+    </div>
+
+</div>
+
+<div class="block container is-max-widescreen">
+    <!-- For Individuals -->
+    <div id="pricing_for_individuals">
+
+        <div class="columns">
+            <div class="column is-4 is-offset-2">
+                <!-- Free Forever Plan -->
+                <div class="price-box" id="pricing_free">
+                    <div class="price is-montserrat">
+                        <h1 class="title">Free</h1>
+                        <div>
+                            <span class="cost">$0</span>
+                            <span class="term">/ forever</span>
+                        </div>
+                    </div>
+                    <div class="price-cta">
+                        <a class="button is-normal is-fullwidth is-hidden">Get Started For Free</a>
+                    </div>
+                    <div class="features">
+                        <p><b>Up To 3 Sheets Per Month</b></p>
+                        <p>Supports up to 100 students</p>
+                        <p>100% Free For Students To Use</p>
+                        <p>Grading & Review Tools</p>
+                        <p>SheetParrot's Logo And Branding</p>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="column">
+                <!-- Basic Plan 
+                <div class="price-box" id="pricing_basic">
+                    <div class="price is-montserrat">
+                        <h1 class="title">Basic</h1>
+                        <div>
+                            <span class="cost">$10</span>
+                            <span class="term">/ month</span>
+                        </div>
+                    </div>
+                    <div class="price-cta">
+                        <a class="button is-normal is-primary is-fullwidth">Subscribe Now</a>
+                    </div>
+                    <div class="features">
+                        <p><b>Unlimited Sheets</b></p>
+                        <p>100% Free For Students To Use</p>
+                        <p>Unlimited Submissions</p>
+                        <p><b>Upload Photos To Your Sheets</b></p>
+                    </div>
+                </div>
+            </div>-->
+            <div class="column is-4">
+                <!-- Professional Plan -->
+                <div class="price-box is-highlighted" id="pricing_professional">
+                    <div class="highlightStarBox"></div>
+                    <div class="highlightStar">
+                        <span class="icon"><i class="fas fa-star"></i></span>
+                    </div>
+                    <div class="price is-montserrat">
+                        <h1 class="title">Professional</h1>
+                        <div>
+                            <span class="cost">$15</span>
+                            <span class="term">/ month</span>
+                        </div>
+                    </div>
+                    <div class="price-cta">
+                        <a class="button is-normal is-fullwidth is-hidden">Subscribe Now</a>
+                    </div>
+                    <div class="features">
+                        <p><b>Unlimited Sheets</b></p>
+                        <p>Supports up to 500 students</p>
+                        <p>100% Free For Students To Use</p>
+                        <p>Grading & Review Tools</p>
+                        <p>Upload Photos To Your Sheets</p>
+                        <p><b>Use Your School's Branding</b></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+<!--
+<script>
+    (function(){
+        let pill=document.querySelector('.pill'),
+            ind_sect=document.querySelector('#pricing_for_individuals'),
+        if(!pill){return;};
+        pill.addEventListener('click',()=>{
+            if(pill.classList.contains('is-active')){
+                pill.classList.remove('is-active')
+                ind_sect.classList.remove('is-hidden')
+                org_sect.classList.add('is-hidden')
+            } else{
+                pill.classList.add('is-active')
+                ind_sect.classList.add('is-hidden')
+                org_sect.classList.remove('is-hidden')
+            }
+            
+        })
+    })();
+</script>
+-->
+<!--
+<style>
+    .pricingStripe{
+        position:relative;
+    }
+    .pricingStripe .object1{
+        display: block;
+        position: absolute;
+        bottom: -190px;
+        width: calc(100% + 60px);
+        height: 600px;
+        left: -30px;
+        right: 0;
+        transform: skewY(345deg);
+        background: rgb(59,138,250);
+        background: -moz-linear-gradient(223deg, rgba(59,138,250,1) 16%, rgba(165,68,223,1) 46%, rgba(253,64,71,1) 100%);
+        background: -webkit-linear-gradient(223deg, rgba(59,138,250,1) 16%, rgba(165,68,223,1) 46%, rgba(253,64,71,1) 100%);
+        background: linear-gradient(223deg, rgba(59,138,250,1) 16%, rgba(165,68,223,1) 46%, rgba(253,64,71,1) 100%);
+    }
+</style>
+ Background stripe 
+<div class="pricingStripe">
+    <div class="object1"></div>
+    <div class="object2"></div>
+    <div class="object3"></div>
+    <div class="object4"></div>
+</div>-->
+
+<!-- Gotta love it Guarantee -->
+<div class="block container is-max-desktop is-pricing-guarantee">
+    <div class="box">
+        <div class="columns is-vcentered pl-4 is-inverted-mobile">
+            <div class="column has-text-centered-mobile">
+                <h1 class="title is-size-3">And You're Backed By Our "Gotta Love It" Guarantee</h1>
+                <div class="is-size-6">
+                    <p class="field">We are confident that SheetParrot will make homework dramatically easier.</p>
+                    <p class="field">If for some reason you no longer feel like SheetParrot is a good fit for you,<br>you can cancel without penalty at any time!</p>
+                    <p class="field">If you are unsatisfied we will refund your last payment within 30 days of your payment.</p>
+                    <p class="field icon-text">
+                        <a href="{{it.domain}}/refund-policy" target="_blank">Read our full refund policy</a><span class="icon has-text-grey-lighter"><i class="fas fa-arrow-right"></i></span>
+                    </p>
+                </div>
+            </div>
+            <div class="column is-3">
+                <figure class="image">
+                    <img src="{{it.domain}}/images/people-1.svg"/>
+                </figure>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- FAQ -->
+<div class="block container is-max-desktop" id="FAQ">
+
+    <div class="block">
+        <h1 class="title is-size-1 has-text-centered">Frequently Asked Questions</h1>
+        <hr class="faq-divider">
+    </div>
+
+    <div class="block columns">
+        <div class="column is-half">
+            <label class="faq-label">Basics</label>
+            <div class="faq">
+                <div class="question">
+                    <span class="icon-text">
+                        <span class="icon is-plus">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="icon is-minus">
+                            <i class="fas fa-minus"></i>
+                        </span>
+                        <span>
+                            What Is SheetParrot?
+                        </span>
+                    </span>
+                </div>
+                <div class="answer">
+                    <p>SheetParrot is a browser-based software that helps teachers to create homework ("sheets") to help their students to learn.</p>
+                    <br>
+                    <p>It helps teachers to easily create, share, and grade homework within just a few minutes.</p>
+                </div>
+            </div>
+            <div class="faq">
+                <div class="question">
+                    <span class="icon-text">
+                        <span class="icon is-plus">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="icon is-minus">
+                            <i class="fas fa-minus"></i>
+                        </span>
+                        <span>
+                            How Do I Get Started?
+                        </span>
+                    </span>
+                </div>
+                <div class="answer">
+                    <p>To get started simply signup for free or select a plan and subscribe.</p>
+                    <br>
+                    <p>You can always upgrade, downgrade, or cancel your account with no consequences at any time, inside of the app.</p>
+                </div>
+            </div>
+            <div class="faq">
+                <div class="question">
+                    <span class="icon-text">
+                        <span class="icon is-plus">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="icon is-minus">
+                            <i class="fas fa-minus"></i>
+                        </span>
+                        <span>
+                            Who Is This For?
+                        </span>
+                    </span>
+                </div>
+                <div class="answer">
+                    <p>SheetParrot is designed specifically for teachers and schools, especially those who are having to teach remotely. We saw a need when we learned that teachers were sending homework to their students using Microsoft Word and PDFs.</p>
+                    <br>
+                    <p>SheetParrot is designed to make homework much simpler, with easy to share links and a simple interface.</p>
+                </div>
+            </div>
+
+            <label class="faq-label">Sheets</label>
+
+            <div class="faq">
+                <div class="question">
+                    <span class="icon-text">
+                        <span class="icon is-plus">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="icon is-minus">
+                            <i class="fas fa-minus"></i>
+                        </span>
+                        <span>
+                            Do My Students Have To Pay?
+                        </span>
+                    </span>
+                </div>
+                <div class="answer">
+                    <p>No your students pay nothing at all! Your students are all 100% free and can submit an infinite amount of work to you for free.</p>
+                    <br>
+                    <p>SheetParrot is designed to be very simple and easy to use. You pay to create sheets and grade their work, your students pay nothing and you pay no extra for your students.</p>
+                </div>
+            </div>
+            <!--<div class="faq">
+                <div class="question">
+                    <span class="icon-text">
+                        <span class="icon is-plus">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="icon is-minus">
+                            <i class="fas fa-minus"></i>
+                        </span>
+                        <span>
+                            Do I Pay More For My Students?
+                        </span>
+                    </span>
+                </div>
+                <div class="answer">
+                    <p>Nope! You could have 7 billion students that actively use your sheets, and it wouldn't cost you anything extra.</p>
+                    <br>
+                    <p>SheetParrot is designed to be very simple and easy to use. You pay to create sheets and grade their work, your students pay nothing and you pay no extra for your students.</p>
+                </div>
+            </div>-->
+            <div class="faq">
+                <div class="question">
+                    <span class="icon-text">
+                        <span class="icon is-plus">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="icon is-minus">
+                            <i class="fas fa-minus"></i>
+                        </span>
+                        <span>
+                            Do we need to download any software?
+                        </span>
+                    </span>
+                </div>
+                <div class="answer">
+                    <p>No! That is what makes SheetParrot so amazing! <b>SheetParrot is a "browser-based" software with zero downloads.</b> There is no "Microsoft Word," no app downloads, and all easy to use!</p>
+                </div>
+            </div>
+            <div class="faq" style="pointer-events: none;">
+                <div class="question">
+                    <span class="icon-text"><span></span></span>
+                </div>
+            </div>
+
+            <label class="faq-label">Resources</label>
+            <div class="faq">
+                <div class="question">
+                    <span class="icon-text">
+                        <span class="icon is-plus">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="icon is-minus">
+                            <i class="fas fa-minus"></i>
+                        </span>
+                        <span>
+                            Does this work with PowerSchool?
+                        </span>
+                    </span>
+                </div>
+                <div class="answer">
+                    <p>We are working hard to get PowerSchool fully integrated with SheetParrot! We are hoping to have this feature available to the public soon.</p>
+                    <br><br>
+                    <p>In the meantime, we do allow you export all grades into .csv files! This alone will save you a lot of time trying to copy/paste grades into PowerSchool.</p>
+                </div>
+            </div>
+
+        </div>
+        <div class="column is-half">
+            <label class="faq-label">Pricing</label>
+            <div class="faq">
+                <div class="question">
+                    <span class="icon-text">
+                        <span class="icon is-plus">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="icon is-minus">
+                            <i class="fas fa-minus"></i>
+                        </span>
+                        <span>
+                            How Can A School Pay For Multiple Teachers?
+                        </span>
+                    </span>
+                </div>
+                <div class="answer">
+                    <p>If you're a school looking to adopt SheetParrot for multiple teachers, we're here to support you.</p>
+                    <br>
+                    <p>We're working on creating a streamlined experience for schools and organizations soon, <a href="{{it.domain}}/support">contact us</a> for more payment options and improving your experience.</p>
+                </div>
+            </div>
+            <div class="faq">
+                <div class="question">
+                    <span class="icon-text">
+                        <span class="icon is-plus">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="icon is-minus">
+                            <i class="fas fa-minus"></i>
+                        </span>
+                        <span>
+                            Do You Offer Discounts?
+                        </span>
+                    </span>
+                </div>
+                <div class="answer">
+                    <p>It depends! If you're a non-profit or are willing to try unstable beta features, we're willing to talk!</p>
+                    <br>
+                    <p>Send us a message to <a>support@sheetparrot.com</a> and we can talk about how we can help you to succeed.</p>
+                </div>
+            </div>
+            <div class="faq" style="pointer-events: none;">
+                <div class="question">
+                    <span class="icon-text"><span></span></span>
+                </div>
+            </div>
+            <!--
+            <div class="faq">
+                <div class="question">
+                    <span class="icon-text">
+                        <span class="icon is-plus">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="icon is-minus">
+                            <i class="fas fa-minus"></i>
+                        </span>
+                        <span>
+                            Which Plan Should I Choose?
+                        </span>
+                    </span>
+                </div>
+                <div class="answer">
+                    <p><b>The basic plan</b> was designed to be for teachers who just want nothing more than a homework sheet to share with their students. It supports creating sheets, grading their work, and the absolute basics.</p>
+                    <br>
+                    <p><b>The professional plan</b> was designed to be everything you need, from gathering your students together, assigning work to their accounts, settings due dates, and giving your students email reminders.</p>
+                    <br>
+                    <p><b>The organization plan</b> was designed to allow your school to get a discount when paying for multiple students, and to be able to put their own logo/branding on every page.</p>
+                </div>
+            </div>-->
+            <label class="faq-label">Features</label>
+            <div class="faq">
+                <div class="question">
+                    <span class="icon-text">
+                        <span class="icon is-plus">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="icon is-minus">
+                            <i class="fas fa-minus"></i>
+                        </span>
+                        <span>
+                            Is this like Canvas or Blackboard?
+                        </span>
+                    </span>
+                </div>
+                <div class="answer">
+                    <p>In our opinion, we think that Canvas and Blackboard are clunky, overcomplicated, and difficult to use.</p>
+                    <br>
+                    <p>We took away a lot of the complexity and needless overcomplication, and made a very simple easy-to-use tool. Currently, SheetParrot is made primarily for homeworking, easy reminders and for grading. But it still holds powerful tools that make it compete with Canvas and Blackboard.</p>
+                </div>
+            </div>
+            <div class="faq">
+                <div class="question">
+                    <span class="icon-text">
+                        <span class="icon is-plus">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="icon is-minus">
+                            <i class="fas fa-minus"></i>
+                        </span>
+                        <span>
+                            Can we set "deadlines" on sheets?
+                        </span>
+                    </span>
+                </div>
+                <div class="answer">
+                    <p>Yes! In fact, you can set deadlines and your students will be sent email reminders to get their work done before the deadline is past.</p>
+                    <br>
+                    <p>We make it really easy to automatically communicate with your students and remind them to get their work done.</p>
+                </div>
+            </div>
+            <div class="faq">
+                <div class="question">
+                    <span class="icon-text">
+                        <span class="icon is-plus">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="icon is-minus">
+                            <i class="fas fa-minus"></i>
+                        </span>
+                        <span>
+                            Does SheetParrot include reporting?
+                        </span>
+                    </span>
+                </div>
+                <div class="answer">
+                    <p>We do include a very basic form of reporting. You can see how long it takes your students to complete homework, your class's average scores, and the frequency of responses per day.</p>
+                    <br>
+                    <p>We are working hard to bring you new features as quickly as possible, and advanced reporting will soon be more developed.</p>
+                </div>
+            </div>
+
+            <label class="faq-label">Customization</label>
+            <div class="faq">
+                <div class="question">
+                    <span class="icon-text">
+                        <span class="icon is-plus">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="icon is-minus">
+                            <i class="fas fa-minus"></i>
+                        </span>
+                        <span>
+                            Can We Use Our Own Logo / Branding?
+                        </span>
+                    </span>
+                </div>
+                <div class="answer">
+                    <p>Yes! We do support using your own logo, colors, and branding on your teachers and students sheets/dashboard.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    (function(){
+        let FAQS = document.querySelectorAll('#FAQ .faq'),
+            active_faq = null;
+
+        FAQS.forEach(f => {
+            f.addEventListener('click', () => {
+                if(active_faq && active_faq != f){ active_faq.classList.remove('is-active') }
+                f.classList.toggle('is-active'); active_faq = f;
+            })
+        })
+    })();
+</script>

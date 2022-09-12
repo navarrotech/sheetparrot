@@ -1,0 +1,38 @@
+<div class="container mt-2 mb-2">
+    <!-- Noscript -->
+    <noscript class="noscript-wrapper">
+        <div class="loader large"></div>
+        <p>This site requires javascript to function properly. <br> Please enable javascript to continue.</p>
+    </noscript>
+
+    {{@if(it.user.verified == false || it.user.verified == 'false')}}
+    <!-- Verify Email -->
+    <div class="notification is-warning has-text-centered" data-global="verify_email">
+        <p>We've sent an email to <span data-tooltip="Not the right email address? Visit our support page and let us know."><u>{{it.user.email}}</u></span> to verify your account's email address. Please verify your email to access all features. <a onclick='_RVE()'><u>Resend Email?</u></a></p>
+        <script>function _RVE(){$POST("/settings/resendVerification",{},e=>{let i=$QS("div.notification[data-global=verify_email]");200===e.status?i.innerHTML="We've resent a verification email to {{it.user.email}}. Please check your inbox to verify your email.":429===e.status?i.innerHTML="We've already resent a verification email to {{it.user.email}} in the last 5 minutes. Please wait a little while, and try again later.":i.innerHTML="Something went wrong trying to send your verification email. Please try again later."})}</script>
+    </div>
+    {{/if}} 
+
+    {{@if(it.user.preferences.billing.status == "failed")}}
+    <!-- Failed Payment -->
+    <div class="notification is-warning">
+        Heads up! Your most recent payment failed, and your card was declined. Please <a href="{{it.domain}}/billing/failedPayment">update your payment method</a> to continue. We will automatically re-try to collect the payment soon.
+    </div>
+    {{/if}}
+
+    {{ @if(it.has_teacher_invite && !it.requesting_page.startsWith('/my-teachers')) }}
+    <!-- Teacher has invited you -->
+    <div class="notification is-primary">
+        A teacher has invited you to join their classroom. <a href="{{it.domain}}/my-teachers">Click here to view the invitation!</a>
+    </div>
+    {{/if}}
+
+    {{@if(it.showGlobalMessage)}}
+    <!-- Global message-->
+    <div class="notification is-{{it.showGlobalMessage.type}} {{@if(it.showGlobalMessage.islight)}}is-light{{/if}}">
+        <p>{{it.showGlobalMessage.message}}</p>
+        <script>{{@if(it.showGlobalMessage.confetti)}}try{ fireconfetti(); } catch(e){ $ERR(e) }{{/if}}</script>
+    </div>
+    {{/if}}
+
+</div>

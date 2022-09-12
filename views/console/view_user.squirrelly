@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>SheetParrot Console | {{it.selected.email}}</title>
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+
+        <link rel="stylesheet" href="{{it.domain}}/css/console.css?version={{it.css_version}}">
+        <script src="{{it.domain}}/js/vendor/chart.js"></script>
+        <script>const DOMAIN="{{it.domain}}"</script>
+
+    </head>
+    <body>
+        {{@includeFile(it.dir + "/views/console/_headerbar.squirrelly", it)/}}
+        <div class="app">
+
+            <!-- Change email address modal -->
+            <div class="modal is-small" id="changeEmail">
+                <div class="modal-background"></div>
+                <div class="modal-card">
+                    <header class="modal-card-head">
+                        <p class="modal-card-title">Change user's email</p>
+                        <button class="delete" aria-label="close"></button>
+                    </header>
+                    <section class="modal-card-body">
+                        <div class="field">
+                            <label class="label">New Email</label>
+                            <div class="control">
+                                <input class="input" type="text" placeholder="Email" id="newEmail" value="{{it.selected.email}}">
+                            </div>
+                        </div>
+                    </section>
+                    <footer class="modal-card-foot buttons is-right">
+                        <button class="button is-light" aria-label="close">Cancel</button>
+                        <button class="button is-success" onclick="changeEmailAddress()">Save changes</button>
+                    </footer>
+                </div>
+                <script>initModal('changeEmail')</script>
+            </div>
+
+            {{@includeFile(it.dir + "/views/console/_sidebar.squirrelly", it)/}}
+            <div class="main">
+                <div class="splash"></div>
+                <div class="window container is-widescreen is-bottom">
+
+                    <div class="box">
+                        <!-- Header -->
+                        <div class="twobox mb-4">
+                            <div class="nameBadge" style="width:fit-content;">
+                                <figure class="image is-64x64 is-rounded mr-2"><img src="{{it.selected.profile_picture}}"></figure>
+                                <div class="titles">
+                                    <h1 class="title is-size-4">{{it.selected.name}}</h1>
+                                    <h2 class="subtitle is-size-6">{{it.selected.email}}</h2>
+                                </div>
+                            </div>
+                            <div class="buttons is-right">
+                                <div class="dropdown is-right">
+                                    <div class="dropdown-trigger">
+                                        <a class="button is-primary" aria-haspopup="true" aria-controls="dropdown-menu">
+                                            <span>Actions</span>
+                                            <span class="icon is-small">
+                                                <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="dropdown-menu"  role="menu">
+                                        <div class="dropdown-content">
+                                        <a class="dropdown-item" href="{{it.domain}}/console/assumeIdentity?_id={{it.selected._id}}">Login as {{it.selected.first_name}}</a>
+                                        <hr class="dropdown-divider">
+                                        <a class="dropdown-item" onclick="$CLASS('#changeEmail', 'is-active', true)">Change user's email</a>
+                                        <a class="dropdown-item" onclick="resetProfilePicture()">Reset profile picture</a>
+                                        <a class="dropdown-item">Reset password</a>
+                                        <hr class="dropdown-divider">
+                                        <a class="dropdown-item is-danger">Delete {{it.selected.first_name}}</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mb-2 pb-2">
+                            <div id="hermes"></div>
+                        </div>
+
+                        <div class="twobox" style="align-items:flex-start;">
+                            <!-- Inner Sidebar -->
+                            <div class="box sidebar_nav">
+                                <aside class="menu">
+                                    <p class="menu-label">Account</p>
+                                    <ul class="menu-list">
+                                        <li>
+                                            <a id="tab_general" data-for="content_general" class="is-active">
+                                                <span class="icon is-small"><i class="fas fa-address-book"></i></span>
+                                                <span>General</span>
+                                            </a>
+                                        </li>
+                                        <p class="menu-label">Application</p>
+                                        <li>
+                                            <a id="tab_interface" href="{{it.domain}}/console/sheets?filter_email={{it.selected.email}}">
+                                                <span class="icon is-small"><i class="fas fa-file-alt"></i></span>
+                                                <span>Sheets</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </aside>
+                            </div>
+                            
+                            <form class="content_right" autocomplete="off" method="POST" action="/console/a/updateUser">
+                                <input class="is-hidden" name="_id" value="{{it.selected._id}}"/>
+                                <div id="content_general">
+                                    <div class="badges">
+
+                                        <!-- Verification status -->
+                                        {{@if(it.selected.verified)}}
+                                        <div class="badge is-success">
+                                            <span class="badge-title">Verification:</span>
+                                            <span class="badge-content">Verified</span>
+                                        </div>
+                                        {{#else}}
+                                        <div class="badge is-danger">
+                                            <span class="badge-title">Verification:</span>
+                                            <span class="badge-content">Not verified</span>
+                                        </div>
+                                        {{/if}}
+
+                                        {{@if(it.selected.preferences && it.selected.preferences.billing)}}
+                                        <!-- Stripe ID -->
+                                        <a class="badge is-link" href="https://dashboard.stripe.com/customers/{{it.selected.preferences.billing.stripeID}}" target="_blank">
+                                            <span class="badge-title">Stripe ID:</span>
+                                            <span class="badge-content">{{it.selected.preferences.billing.stripeID}}</span>
+                                        </a>
+                                        {{/if}}
+
+                                        {{@if(it.selected.preferences && it.selected.preferences.billing)}}
+                                        <!-- Current Plan -->
+                                        <div class="badge is-warning">
+                                            <span class="badge-title">Current Plan:</span>
+                                            <span class="badge-content">{{it.selected.preferences.billing.plan}}</span>
+                                        </div>
+                                        {{/if}}
+
+                                        {{@if(it.renews_pretty)}}
+                                        <!-- Plan Renewal -->
+                                        <div class="badge is-warning">
+                                            <span class="badge-title">Plan Renews:</span>
+                                            <span class="badge-content" data-tooltip="{{new Date(it.selected.preferences.billing.plan_renews).toDateString()}}">In {{it.renews_pretty}}</span>
+                                        </div>
+                                        {{/if}}
+
+                                    </div>
+                                        
+
+                                    <div class="columns">
+                                        <div class="column">
+                                        
+                                            <div class="field">
+                                                <label class="label">Name</label>
+                                                <div class="control has-icons-left">
+                                                    <input class="input" type="text" placeholder="Name" value="{{it.selected.name}}" autocomplete="none" name="name">
+                                                    <span class="icon is-small is-left"><i class="fas fa-user"></i></span>
+                                                </div>
+                                            </div>
+
+                                            <div class="field">
+                                                <label class="label">Email</label>
+                                                <div class="control has-icons-left">
+                                                    <input class="input" type="text" placeholder="Name" value="{{it.selected.email}}" name="email" disabled>
+                                                    <span class="icon is-small is-left"><i class="fas fa-envelope"></i></span>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="field mb-4">
+                                        <label class="label">Private admin notes</label>
+                                        <div class="control">
+                                            <textarea class="textarea" maxlength="500" placeholder="(Only visible to admins)" name="admin_note">{{@if(it.selected.preferences && it.selected.preferences.admin_note)}}{{it.selected.preferences.admin_note}}{{/if}}</textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="buttons is-right mt-4">
+                                    <button class="button is-primary" type="submit" onclick="this.classList.add('is-loading')">Save All Changes</button>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <script>
+            const _id = "{{it.selected._id}}";
+            /* <-- Tabs logic --> */
+            (function(){
+                let tabs   = $QSA('.sidebar_nav a'),
+                    active = $QS('#content_general')
+
+                tabs.forEach(t => {
+                    let link = t.getAttribute('data-for')
+                    if(link && !t.href){
+                        t.addEventListener('click', () => {
+                            $CLASS(active, 'is-hidden', true )
+                            $CLASS(`#${link}`, 'is-hidden', false)
+                            $CLASS('.sidebar_nav a.is-active', 'is-active', false)
+                            $CLASS(t, 'is-active', true)
+                            active = $QS(`#${link}`)
+                        })
+                    }
+                })
+            })();
+
+            (function(){
+                let status = getCookie('update_user_status')
+                if(status){
+                    if(status == '200'){ displayMessage("Successfully updated this information!", "success", true) }
+                    else{ displayMessage("Something went wrong trying to update the user.", "danger", true) }
+                    deleteCookie('update_user_status')
+                }
+            })();
+
+            /* <-- Notification updater --> */
+            (function(){
+                let checkboxes = $QSA("#content_notifications input[type=checkbox]")
+                checkboxes.forEach(cb => {
+                    cb.addEventListener('change', () => {
+                        $POST('/console/a/alterNotification', {
+                            setting:cb.getAttribute('data-value'), 
+                            value:cb.checked,
+                            _id
+                        }, (result, text) => {
+                            if(result.status == 200){
+                                displayMessage("Successfully updated notification preference for user.", 'success', true)
+                            }
+                            else{
+                                displayMessage("Something went wrong trying to update that notification preference", 'danger', true)
+                            }
+                        })
+                    })
+                })
+            })();
+
+            function changeEmailAddress(){
+                showLoading("Changing user's email address... Please wait")
+                let new_email = $QS('#newEmail')
+                $POST('/console/a/changeUserEmail', { email:new_email.value, _id }, (result, text) => { 
+                    if(result.status == 500){ console.log(result) }
+                    else if(result.url != window.location.href){ window.location.href = (result.url) }
+                    else{ window.location.reload() }
+                })
+            }
+            function resetProfilePicture(){
+                if(confirm("Are you sure you want reset the profile picture?")){
+                    showLoading("Resetting the user's profile picture... Please wait")
+                    let new_email = $QS('#newEmail')
+                    $POST('/console/a/resetProfilePicture', { _id }, (result, text) => { 
+                        if(result.status == 500){ console.log(result) }
+                        else if(result.url != window.location.href){ window.location.href = (result.url) }
+                        else{ window.location.reload() }
+                    })
+                }
+            };
+        </script>
+    </body>
+</html>

@@ -1,0 +1,108 @@
+<!-- Global Code Start -->
+<meta content="utf-8" http-equiv="encoding">
+<!-- <meta content="IE=edge" http-equiv="X-UA-Compatible"> -->
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="icon" type="image/png" href="{{it.domain}}/images/logo.svg">
+
+<!-- Global Meta Data -->
+<meta class="metaTagTop" name="keywords" content="sheetparrot,homework,sheets,online homework">
+<meta class="metaTagTop" name="author" content="SheetParrot">
+<meta class="metaTagTop" property="og:image" content="{{it.domain}}/images/logo.svg" id="social-image">
+<meta property="og:url" content="{{it.domain}}">
+<meta property="og:type" content="website">
+
+<!-- CSS -->
+<link rel="stylesheet" href="{{it.domain}}/css/SheetParrot.min.css?version={{it.css_version}}">
+
+<!-- Fonts: Cabin, Montserrat, Poppins, Quicksand, PT Mono and Roboto-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900" rel="stylesheet">
+
+<!-- Scripts -->
+<script type="text/javascript" src="{{it.domain}}/js/core.js?version={{it.css_version}}"></script>
+
+<!-- Font Awesome 5 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/js/all.min.js" integrity="sha512-YSdqvJoZr83hj76AIVdOcvLWYMWzy6sJyIMic2aQz5kh2bPTd9dzY3NtdeEAzPp/PhgZqr4aJObB3ym/vsItMg==" crossorigin="anonymous" async></script>
+
+{{@if(it.user && it.user.first_name && it.user.email)}}
+<!-- Authenticated Freshchat Session -->
+<script>
+    function initFreshChat() {
+      window.fcWidget.init({
+        token: "26706b0c-94f6-461f-8670-fcb59e53f37d",
+        host: "https://wchat.freshchat.com",
+        firstName: "{{it.user.first_name}}",
+        lastName: "{{it.user.last_name}}",
+        email: "{{it.user.email}}",
+        plan: "{{it.user.preferences.billing.plan}}"
+      });
+    }
+  console.log("Freshchat: Successfully authenticated session")
+</script>
+{{#else}}
+<!-- Unauthenticated Freshchat Session -->
+<script>
+  function initFreshChat() {
+    window.fcWidget.init({
+      token: "26706b0c-94f6-461f-8670-fcb59e53f37d",
+      host: "https://wchat.freshchat.com",
+    });
+  }
+  console.warn("Freshchat: Anonymous session actived")
+</script>
+{{/if}}
+<!-- FreshChat Initialization -->
+<script>function initialize(i,t){var e;i.getElementById(t)?initFreshChat():((e=i.createElement("script")).id=t,e.async=!0,e.src="https://wchat.freshchat.com/js/widget.js",e.onload=initFreshChat,i.head.appendChild(e))}function initiateCall(){initialize(document,"Freshdesk Messaging-js-sdk")}window.addEventListener?window.addEventListener("load",initiateCall,!1):window.attachEvent("load",initiateCall,!1);</script>
+
+
+{{@if(!it.domain.includes('localhost'))}}
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-213698949-1">
+</script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-213698949-1');
+</script>
+
+<!-- Mouseflow -->
+<script type="text/javascript">
+  window._mfq = window._mfq || [];
+  (function() {
+    var mf = document.createElement("script");
+    mf.type = "text/javascript"; mf.defer = true;
+    mf.src = "https://cdn.mouseflow.com/projects/c0be60ab-6b66-437b-b660-cb5df4efcb82.js";
+    document.getElementsByTagName("head")[0].appendChild(mf);
+  })();
+</script>
+
+<!-- Facebook Pixel -->
+<script>
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '4460361337418599');
+  fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=4460361337418599&ev=PageView&noscript=1"
+/></noscript>
+{{/if}}
+
+<script>
+    const _ENV = "{{it.ENV.NODE_ENV}}";
+    const _DOMAIN = "{{it.domain}}";
+    const AUTHORIZED = "{{it.authorized}}" == "true" ? true : false;
+    const _PLAN = "{{@if(it.authorized && it.user)}}{{it.user.preferences.billing.plan}}{{/if}}"
+    const _EMAIL = "{{@if(it.authorized)}}{{it.user.email}}{{#else}}anonymous{{/if}}";
+</script>
+
+<!-- // Global Code End // -->

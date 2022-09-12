@@ -1,0 +1,225 @@
+<!doctype html>
+<html>
+    <head> 
+        <title>SheetParrot | Signup</title>
+        {{@includeFile(it.dir + "/views/partials/_tracking_header.squirrelly", it)/}}
+        {{@includeFile(it.dir + "/views/partials/_global_head.squirrelly", it)/}}
+
+        <style>
+            #google-signin{
+                opacity:0!important;
+                pointer-events:none;
+                position:absolute!important;
+                top:-1px;
+            }
+            #signup{
+                padding-top:1.5em;
+                padding-bottom:1.5em;
+                font-size:16px;
+            }
+            .button:not(.is-loading).is-google span{
+                color:white;
+            }
+            .master{
+                padding:4em 0em !important;
+            }
+            .columns .column:first-child{
+                border-right:1px solid rgb(229, 230, 238);
+            }
+            .columns .column:first-child{
+                padding-left:2.75em;
+                padding-right:2em;
+            }
+            .columns .column:last-child{
+                padding-left:2em;
+                padding-right:2.75em;
+            }
+            .title.is-size-1{
+                font-weight:700;
+                font-size:2.2em !important;
+            }
+            .feature:not(:last-child){
+                margin-bottom:0.75em;
+            }
+            .feature .headline{
+                font-weight:700;
+            }
+            .legal{
+                max-width:300px;
+                margin:0 auto;
+            }
+            @media only screen and (max-width: 768px){
+                .emailFields .field{ width:100%; }
+                .master{
+                    max-width:400px;
+                    width:100%;
+                    display: block;
+                    margin:0 auto;
+                    padding:2em 0em !important;
+                }
+                .section{
+                    margin-bottom:300px;
+                }
+            }
+            @media only screen and (max-width: 415px){
+                .section{
+                    padding-left:0!important;
+                    padding-right:0!important;
+                }
+                .column{
+                    padding-left:1.5em!important;
+                    padding-right:1.5em!important;
+                }
+            }
+        </style>
+    </head>
+    
+    <body>
+        <div id="google-signin"></div>
+
+        <!-- Header -->
+        <div class="navbar shadow20">
+            <div class="container is-max-widescreen twobox also-mobile is-flex">
+                <div class="navbar-brand">
+                    <a class="navbar-item" href="{{it.domain}}">
+                        <div class="image is-32x32">
+                            <img class="logo" src="{{it.domain}}/images/logo.svg" alt style="min-height:32px;"/>
+                        </div>
+                        <span class="ml-2 has-text-weight-medium is-size-5">SheetParrot</span>
+                    </a>
+                </div>
+                <div class="buttons is-right">
+                    <a class="button is-light" href="{{it.domain}}/login">Log in</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sign up fields / form -->
+        <section class="section">
+            <div class="container is-max-desktop">
+                <div class="box master">
+                    <div class="columns">
+                        <div class="column is-hidden-mobile">
+                            <h1 class="title is-size-1">
+                                Join teachers worldwide who create their homework using SheetParrot
+                            </h1>
+                            <div class="feature">
+                                <div class="is-size-5 icon-text has-text-weight-semibold">
+                                    <span class="icon has-text-success">
+                                        <i class="fas fa-check-circle"></i>
+                                    </span>
+                                    <span>Easy to use</span>
+                                </div>
+                            </div>
+                            <div class="feature">
+                                <div class="is-size-5 icon-text has-text-weight-semibold">
+                                    <span class="icon has-text-success">
+                                        <i class="fas fa-check-circle"></i>
+                                    </span>
+                                    <span>Get started quickly</span>
+                                </div>
+                            </div>
+                            <div class="feature">
+                                <div class="is-size-5 icon-text has-text-weight-semibold">
+                                    <span class="icon has-text-success">
+                                        <i class="fas fa-check-circle"></i>
+                                    </span>
+                                    <span>Make homework fun again</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="column">
+                            
+                            <div class="block">
+                                <h1 class="title is-size-3 has-text-centered">
+                                    Create a FREE SheetParrot account
+                                </h1>
+                                <h2 class="subtitle is-size-7 has-text-centered">
+                                    Takes less than 2 minutes &bull; No credit card required
+                                </h2>
+                            </div>
+                            <div class="block">
+
+                                <div class="field google-login" style="height:40px;" id="google-loader">
+                                    <button type="button" class="button is-google is-loading is-fullwidth abcRioButton abcRioButtonBlue">
+                                        <div class="abcRioButtonIcon icon" style="padding:15px">
+                                            <div style="width:18px;height:18px;" class="abcRioButtonSvgImageWithFallback abcRioButtonIconImage abcRioButtonIconImage18">
+                                                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="18px" height="18px" viewBox="0 0 48 48" class="abcRioButtonSvg">
+                                                    <g><path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+                                                    <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+                                                    <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+                                                    <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+                                                    <path fill="none" d="M0 0h48v48H0z"></path></g>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                        <span>Sign up with Google</span>
+                                    </button>
+                                </div>
+                                <div class="field facebook-login" style="height:40px;">
+                                    <button class="button is-facebook is-loading is-fullwidth">
+                                        <span class="icon">
+                                            <i class="fab fa-facebook-square fa-2x"></i>
+                                        </span>
+                                        <span>Sign up with Facebook</span>
+                                    </button>
+                                </div>
+                                
+                            </div>
+                            <div class="block">
+                                <div class="is-divider" data-content="OR"></div>
+                            </div>
+                            
+                            <div class="block">
+
+                                <div class="field emailFields">
+                                    <div class="field">
+                                        <div class="control">
+                                            <input class="input is-size-6" id="email" type="email" placeholder="Your Best Email" autocomplete="email" maxlength="100">
+                                        </div>
+                                    </div>
+                                    <div class="field twobox">
+                                        <div class="field mb-0">
+                                            <div class="control">
+                                                <input class="input is-size-6" type="text" id="first_name" placeholder="First Name" autocomplete="given-name" maxlength="60">
+                                            </div>
+                                        </div>
+                                        <div class="field">
+                                            <div class="control">
+                                                <input class="input is-size-6" type="text" id="last_name" placeholder="Last Name" autocomplete="family-name" maxlength="60">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="field passwordFields is-hidden">
+                                    <div class="control has-icons-left">
+                                        <input class="input" type="password" id="password" placeholder="Create Password" autocomplete="new-password" maxlength="60">
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-lock"></i>
+                                        </span>
+                                    </div>
+                                    <p class="help">Password must at least 8 characters long</p>
+                                </div>
+                                <div class="field buttons is-centered">
+                                    <a class="button is-fullwidth is-primary" id="signup" disabled="true">Get Started Free</a>
+                                </div>
+                            </div>
+                            <p class="field has-text-centered is-size-7 legal">By signing up, you are agreeing to SheetParrot's <a href="{{it.domain}}/terms-of-service" target="_blank">Terms of Service</a> and <a href="{{it.domain}}/privacy-policy" target="_blank">Privacy Policy</a></p>
+                            <p class="field has-text-centered is-size-7">Already have an account?&nbsp;<a href="{{it.domain}}/login">Log in</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        {{@includeFile(it.dir + "/views/partials/_global_foot.squirrelly", it)/}}
+        
+        <!-- Facebook Authentication -->
+        <script crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v12.0&appId=945177056347446&autoLogAppEvents=1" nonce="lXStBKMV"></script>
+
+        <script src="{{it.domain}}/js/authentication/signup.js"></script>
+        
+        <!-- Google Authentication -->
+        <script src="https://apis.google.com/js/platform.js?onload=setupGoogleAuth"></script>
+    </body>
+</html>
